@@ -8823,6 +8823,8 @@ var CryptoJS = CryptoJS || function (u, p) {
                 return c
             }, create: function () {
                 var a = this.extend();
+                // console.log("create.a=",a);
+                // console.log("create.arguments=",arguments);
                 a.init.apply(a, arguments);
                 return a
             }, init: function () {
@@ -8878,15 +8880,9 @@ var CryptoJS = CryptoJS || function (u, p) {
                 for (var e = [], j = 0; j < a; j++)e.push(String.fromCharCode(c[j >>> 2] >>> 24 - 8 * (j % 4) & 255));
                 return e.join("")
             }, parse: function (a) {
-                console.log("parse2,a=", a);
                 for (var c = a.length, e = [], j = 0; j < c; j++) {
                     e[j >>> 2] |= (a.charCodeAt(j) & 255) << 24 - 8 * (j % 4);
-                    console.log((a.charCodeAt(j) & 255) << 24);
-                    console.log("2=",e[j>>>2]);
-                    console.log("j=",j>>>2);
                 }
-                console.log("parse2,e=",e);
-                console.log("parse2,c=",c);
                 return new r.init(e, c)
             }
         }, x = w.Utf8 = {
@@ -8897,7 +8893,6 @@ var CryptoJS = CryptoJS || function (u, p) {
                     throw Error("Malformed UTF-8 data")
                 }
             }, parse: function (a) {
-                console.log("parse,a=", a);
                 return b.parse(unescape(encodeURIComponent(a)))
             }
         }, q = l.BufferedBlockAlgorithm = t.extend({
@@ -9057,6 +9052,7 @@ CryptoJS.lib.Cipher || function (u) {
     var p = CryptoJS, d = p.lib, l = d.Base, s = d.WordArray, t = d.BufferedBlockAlgorithm, r = p.enc.Base64, w = p.algo.EvpKDF, v = d.Cipher = t.extend({
         cfg: l.extend(),
         createEncryptor: function (e, a) {
+            console.log("调用createEncryptor2");
             return this.create(this.bbv, e, a)
         },
         createDecryptor: function (e, a) {
@@ -9087,6 +9083,8 @@ CryptoJS.lib.Cipher || function (u) {
         bbn: function (e) {
             return {
                 encrypt: function (b, k, d) {
+                    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    console.log("enctypt:e=", e);
                     return ("string" == typeof k ? c : a).encrypt(e, b, k, d)
                 }, decrypt: function (b, k, d) {
                     return ("string" == typeof k ? c : a).decrypt(e, b, k, d)
@@ -9105,6 +9103,7 @@ CryptoJS.lib.Cipher || function (u) {
         for (var d = 0; d < b; d++)e[a + d] ^= c[d]
     }, q = (d.BlockCipherMode = l.extend({
         createEncryptor: function (e, a) {
+            console.log("调用createEncryptor1");
             return this.Encryptor.create(e, a)
         }, createDecryptor: function (e, a) {
             return this.Decryptor.create(e, a)
@@ -9141,10 +9140,18 @@ CryptoJS.lib.Cipher || function (u) {
     };
     d.BlockCipher = v.extend({
         cfg: v.cfg.extend({mode: b, padding: q}), reset: function () {
+            console.log("调用iv和mode");
             v.reset.call(this);
             var a = this.cfg, b = a.iv, a = a.mode;
-            if (this.btJ == this.bbv)var c = a.createEncryptor; else c = a.createDecryptor, this.btG = 1;
-            this.fC = c.call(a, this, b && b.words)
+            if (this.btJ == this.bbv) {
+                //调用这部分
+                // console.log("调用iv和mode true");
+                var c = a.createEncryptor;
+            } else {
+                // console.log("调用iv和mode false");
+                c = a.createDecryptor, this.btG = 1;
+            }
+            this.fC = c.call(a, this, b && b.words);
         }, btI: function (a, b) {
             this.fC.processBlock(a, b)
         }, PX: function () {
@@ -9166,7 +9173,10 @@ CryptoJS.lib.Cipher || function (u) {
         stringify: function (a) {
             var b = a.ciphertext;
             a = a.salt;
-            return (a ? s.create([1398893684, 1701076831]).concat(a).concat(b) : b).toString(r)
+            // console.log("s.create=",s.create);
+            var f = (a ? s.create([1398893684, 1701076831]).concat(a).concat(b) : b).toString(r)
+            console.log("stringify.f=", f);
+            return f
         }, parse: function (a) {
             a = r.parse(a);
             var b = a.words;
@@ -9179,11 +9189,18 @@ CryptoJS.lib.Cipher || function (u) {
         }
     }, a = d.SerializableCipher = l.extend({
         cfg: l.extend({format: b}), encrypt: function (a, b, c, d) {
+            console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            console.log("encrypt:a=", a);
+            console.log("encrypt:b=", b);
+            console.log("encrypt:c=", c);
+            console.log("encrypt:d=", d);
             d = this.cfg.extend(d);
+            console.log("encrypt2:d=", d);
+            console.log("encrypy2:d.format=", d.format.stringify);
             var l = a.createEncryptor(c, d);
             b = l.finalize(b);
             l = l.cfg;
-            return n.create({
+            var result = n.create({
                 ciphertext: b,
                 key: c,
                 iv: l.iv,
@@ -9192,7 +9209,9 @@ CryptoJS.lib.Cipher || function (u) {
                 padding: l.padding,
                 blockSize: a.blockSize,
                 formatter: d.format
-            })
+            });
+            console.log("encrypy.result=",result);
+            return result;
         }, decrypt: function (a, b, c, d) {
             d = this.cfg.extend(d);
             b = this.Ub(b, d.format);
@@ -9210,6 +9229,7 @@ CryptoJS.lib.Cipher || function (u) {
         }
     }, c = d.PasswordBasedCipher = a.extend({
         cfg: a.cfg.extend({kdf: p}), encrypt: function (b, c, d, l) {
+            consolg.log("调用5");
             l = this.cfg.extend(l);
             d = l.kdf.execute(d, b.keySize, b.ivSize);
             l.iv = d.iv;
@@ -9506,16 +9526,24 @@ setMaxDigits(20), dpl10 = 15, lr10 = biFromNumber(1e15), hexatrigesimalToChar = 
     }
 
     function b(a, b) {
-
-        var c = CryptoJS.enc.Utf8.parse(b), d = CryptoJS.enc.Utf8.parse("0102030405060708"), e = CryptoJS.enc.Utf8.parse(a), f = CryptoJS.AES.encrypt(e, c, {
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        
+        var c = CryptoJS.enc.Utf8.parse(b);
+        var d = CryptoJS.enc.Utf8.parse("0102030405060708");
+        var e = CryptoJS.enc.Utf8.parse(a);
+        console.log("b:a=",a);
+        console.log("b:e=",e);
+        console.log("b:b=",b);
+        console.log("b:c=",c);
+        var m = {iv: d,
+            mode: CryptoJS.mode.CBC};
+        console.log("b.m=",m);
+        var f = CryptoJS.AES.encrypt(e, c, {
             iv: d,
             mode: CryptoJS.mode.CBC
         });
-        console.log("a=", a);
-        console.log("e=", e);
-        console.log("b=", b);
-        console.log("c=", c);
-        console.log("d=", d);
+        console.log("b:result1=", f);
+        console.log("b:result2=", f.toString());
         return f.toString()
     }
 
@@ -9525,12 +9553,17 @@ setMaxDigits(20), dpl10 = 15, lr10 = biFromNumber(1e15), hexatrigesimalToChar = 
     }
 
     function d(d, e, f, g) {
-        console.log("li:d=", d);
-        console.log("li2:e=", e);
-        console.log("li3:f=", f);
-        console.log("li4:g", g);
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         var h = {}, i = a(16);
-        console.log("i=", i);//i 只要16位就可以了
+
+        console.log("开始解析");
+        console.log("d:d=", d);
+        console.log("d:e=", e);
+        console.log("d:f=", f);
+        console.log("d:g=", g);
+        console.log("d:i=", i);//i 只要16位就可以了
         return h.encText = b(d, g), h.encText = b(h.encText, i), h.encSecKey = c(i, e, f), h
     }
 
@@ -9611,12 +9644,9 @@ setMaxDigits(20), dpl10 = 15, lr10 = biFromNumber(1e15), hexatrigesimalToChar = 
     window.GEnc = true;
     var bbZ = function (bOP) {
         var bp = [];
-        // console.log("liguoqinjim,bm.cv=",bm.cv);
         bm.cv(bOP, function (bOO) {
             bp.push(cnb.emj[bOO])
         });
-        // console.log("liguoqinjim.bp=",bp);
-        // console.log("liguoqinjim.bp.json=",bp.join(""));
         return bp.join("")
     };
     var bON = bA.cG;
@@ -9637,8 +9667,6 @@ setMaxDigits(20), dpl10 = 15, lr10 = biFromNumber(1e15), hexatrigesimalToChar = 
             bZ = bZ.replace("api", "weapi");
             bf.method = "post";
             delete bf.query;
-            // console.log("bl=",bl);
-            // console.log("cnb.md=",cnb.md);
             var bua = window.asrsea(JSON.stringify(bl), bbZ(["流泪", "强"]), bbZ(cnb.md), bbZ(["爱心", "女孩", "惊恐", "大笑"]));
             bf.data = bm.eX({params: bua.encText, encSecKey: bua.encSecKey})
         }
