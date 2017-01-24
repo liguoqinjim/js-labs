@@ -8878,8 +8878,12 @@ var CryptoJS = CryptoJS || function (u, p) {
             }
         }), w = d.enc = {}, v = w.Hex = {
             stringify: function (a) {
-                // console.log("6>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                // console.log("w.stringify.a=",a);
+                // if (liguoqinjim.a != a || a == "" || a == undefined){
+                //     console.log("6>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                //     console.log("w.stringify.a=",a);
+                //     liguoqinjim.a = a;
+                // }
+
                 var c = a.words;
                 a = a.sigBytes;
                 // console.log("w.stringify.c=",c);
