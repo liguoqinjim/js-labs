@@ -8,3 +8,7 @@ for (var c = a.length, e = [], j = 0; j < c; j++) {
     // console.log((a.charCodeAt(j) & 255) << 24 - 8 * (j % 4));
 }
 console.log(e);
+
+c = undefined;
+w = c ? 1:2;
+console.log("w=",w);

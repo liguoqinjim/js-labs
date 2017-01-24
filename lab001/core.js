@@ -1,4 +1,7 @@
 (function () {
+    //liguoqinjim
+    liguoqinjim = {"test":"hello liguoqinjim!"};
+
     window.NEJ = window.NEJ || {};
     NEJ.O = {};
     NEJ.R = [];
@@ -8816,21 +8819,29 @@ var CryptoJS = CryptoJS || function (u, p) {
                 var c = new s;
                 a && c.mixIn(a);
                 c.hasOwnProperty("init") || (c.init = function () {
+                    console.log("2>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    // console.log("init=",c.$super.init);
                     c.$super.init.apply(this, arguments)
                 });
                 c.init.prototype = c;
                 c.$super = this;
                 return c
             }, create: function () {
+                console.log("3>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                 var a = this.extend();
-                // console.log("create.a=",a);
-                // console.log("create.arguments=",arguments);
+                console.log("create,a=", a);
+                console.log("create.arguments=", arguments);
+                // console.log("create.a.init=",a.init);
                 a.init.apply(a, arguments);
+                console.log("create,a=", a);
                 return a
             }, init: function () {
             }, mixIn: function (a) {
+                console.log("4>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                 for (var c in a)a.hasOwnProperty(c) && (this[c] = a[c]);
+                console.log("mixIn,a=", a);
                 a.hasOwnProperty("toString") && (this.toString = a.toString)
+                console.log("mixIn,a=", a);
             }, clone: function () {
                 return this.init.prototype.extend(this)
             }
@@ -8839,7 +8850,13 @@ var CryptoJS = CryptoJS || function (u, p) {
                 a = this.words = a || [];
                 this.sigBytes = c != p ? c : 4 * a.length
             }, toString: function (a) {
-                return (a || v).stringify(this)
+                // console.log("5>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                // console.log("r.toString.a=",a);
+                // console.log("r.toString.v=",v);
+                // console.log("r.toString.v.stringify=",v.stringify);
+                return (a || v).stringify(this);
+                // console.log("r.toString.result=",result);
+                // return result;
             }, concat: function (a) {
                 var c = this.words, e = a.words, j = this.sigBytes;
                 a = a.sigBytes;
@@ -8861,8 +8878,11 @@ var CryptoJS = CryptoJS || function (u, p) {
             }
         }), w = d.enc = {}, v = w.Hex = {
             stringify: function (a) {
+                // console.log("6>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                // console.log("w.stringify.a=",a);
                 var c = a.words;
                 a = a.sigBytes;
+                // console.log("w.stringify.c=",c);
                 for (var e = [], j = 0; j < a; j++) {
                     var k = c[j >>> 2] >>> 24 - 8 * (j % 4) & 255;
                     e.push((k >>> 4).toString(16));
@@ -9052,8 +9072,11 @@ CryptoJS.lib.Cipher || function (u) {
     var p = CryptoJS, d = p.lib, l = d.Base, s = d.WordArray, t = d.BufferedBlockAlgorithm, r = p.enc.Base64, w = p.algo.EvpKDF, v = d.Cipher = t.extend({
         cfg: l.extend(),
         createEncryptor: function (e, a) {
-            console.log("调用createEncryptor2");
-            return this.create(this.bbv, e, a)
+            console.log("7>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            console.log("调用createEncryptor2:e,a=", e, a);
+            var result = this.create(this.bbv, e, a);
+            console.log("调用createEncryptor2:result=", result);
+            return result
         },
         createDecryptor: function (e, a) {
             return this.create(this.bPd, e, a)
@@ -9083,7 +9106,7 @@ CryptoJS.lib.Cipher || function (u) {
         bbn: function (e) {
             return {
                 encrypt: function (b, k, d) {
-                    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    console.log("8>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                     console.log("enctypt:e=", e);
                     return ("string" == typeof k ? c : a).encrypt(e, b, k, d)
                 }, decrypt: function (b, k, d) {
@@ -9103,8 +9126,11 @@ CryptoJS.lib.Cipher || function (u) {
         for (var d = 0; d < b; d++)e[a + d] ^= c[d]
     }, q = (d.BlockCipherMode = l.extend({
         createEncryptor: function (e, a) {
-            console.log("调用createEncryptor1");
-            return this.Encryptor.create(e, a)
+            console.log("9>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            console.log("调用createEncryptor1:e,a=", e, a);
+            var result = this.Encryptor.create(e, a);
+            console.log("调用createEncryptor1:result=", result);
+            return result;
         }, createDecryptor: function (e, a) {
             return this.Decryptor.create(e, a)
         }, init: function (e, a) {
@@ -9140,6 +9166,7 @@ CryptoJS.lib.Cipher || function (u) {
     };
     d.BlockCipher = v.extend({
         cfg: v.cfg.extend({mode: b, padding: q}), reset: function () {
+            console.log("10>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             console.log("调用iv和mode");
             v.reset.call(this);
             var a = this.cfg, b = a.iv, a = a.mode;
@@ -9165,15 +9192,27 @@ CryptoJS.lib.Cipher || function (u) {
     });
     var n = d.CipherParams = l.extend({
         init: function (a) {
+            console.log("11>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            console.log("init2:a=", a);
             this.mixIn(a)
+            console.log("init2:a=", a);
         }, toString: function (a) {
-            return (a || this.formatter).stringify(this)
+            console.log("12>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            console.log("toString,a=", a);
+            // console.log("toString.formatter=",this.formatter.stringify);
+            var b = (a || this.formatter).stringify(this);
+            console.log("toString,b=", b);
+            return b;
         }
     }), b = (p.format = {}).OpenSSL = {
         stringify: function (a) {
+            console.log("13>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             var b = a.ciphertext;
             a = a.salt;
-            // console.log("s.create=",s.create);
+            console.log("stringify.a=", a);
+            console.log("stringify.b=", b);
+            // console.log("stringify.b.toString=",b.toString);
+            console.log("stringify,r=", r);
             var f = (a ? s.create([1398893684, 1701076831]).concat(a).concat(b) : b).toString(r)
             console.log("stringify.f=", f);
             return f
@@ -9189,17 +9228,17 @@ CryptoJS.lib.Cipher || function (u) {
         }
     }, a = d.SerializableCipher = l.extend({
         cfg: l.extend({format: b}), encrypt: function (a, b, c, d) {
-            console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            console.log("14>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             console.log("encrypt:a=", a);
             console.log("encrypt:b=", b);
             console.log("encrypt:c=", c);
             console.log("encrypt:d=", d);
             d = this.cfg.extend(d);
-            console.log("encrypt2:d=", d);
-            console.log("encrypy2:d.format=", d.format.stringify);
+            console.log("encrypt:d=", d);
             var l = a.createEncryptor(c, d);
             b = l.finalize(b);
             l = l.cfg;
+            console.log("encrypt:mode,padding=", l.mode, l.padding);
             var result = n.create({
                 ciphertext: b,
                 key: c,
@@ -9210,7 +9249,7 @@ CryptoJS.lib.Cipher || function (u) {
                 blockSize: a.blockSize,
                 formatter: d.format
             });
-            console.log("encrypy.result=",result);
+            console.log("encrypt:result=", result);
             return result;
         }, decrypt: function (a, b, c, d) {
             d = this.cfg.extend(d);
@@ -9526,18 +9565,20 @@ setMaxDigits(20), dpl10 = 15, lr10 = biFromNumber(1e15), hexatrigesimalToChar = 
     }
 
     function b(a, b) {
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        
+        console.log("15>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
         var c = CryptoJS.enc.Utf8.parse(b);
         var d = CryptoJS.enc.Utf8.parse("0102030405060708");
         var e = CryptoJS.enc.Utf8.parse(a);
-        console.log("b:a=",a);
-        console.log("b:e=",e);
-        console.log("b:b=",b);
-        console.log("b:c=",c);
-        var m = {iv: d,
-            mode: CryptoJS.mode.CBC};
-        console.log("b.m=",m);
+        console.log("b:a=", a);
+        console.log("b:e=", e);
+        console.log("b:b=", b);
+        console.log("b:c=", c);
+        var m = {
+            iv: d,
+            mode: CryptoJS.mode.CBC
+        };
+        console.log("b.m=", m);
         var f = CryptoJS.AES.encrypt(e, c, {
             iv: d,
             mode: CryptoJS.mode.CBC
@@ -9553,9 +9594,10 @@ setMaxDigits(20), dpl10 = 15, lr10 = biFromNumber(1e15), hexatrigesimalToChar = 
     }
 
     function d(d, e, f, g) {
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        console.log("1>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        console.log("1>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        console.log("1>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        console.log("liguoqinjim.test=",liguoqinjim.test);
         var h = {}, i = a(16);
 
         console.log("开始解析");
