@@ -7,3 +7,4 @@ js lab
 |lab002|正则表达式|
 |lab003|多参数函数|
 |lab004|html5 localStorage|
+|lab005|behavior3，行为树例子|

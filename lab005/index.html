@@ -1,0 +1,84 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Behavior Tree Example</title>
+
+    <style type="text/css">
+        html {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            margin: 0px;
+            padding: 0px;
+            text-align: center;
+        }
+
+        canvas {
+            margin: 50px auto;
+            background: #F2F2F2;
+        }
+    </style>
+
+    <!-- CREATEJS -->
+    <script type="text/javascript" src="http://code.createjs.com/createjs-2013.12.12.min.js"></script>
+
+    <!-- ALL OUR CLASSES HERE -->
+    <script type="text/javascript" src="behaviors.js"></script>
+
+    <!-- GAME CODE -->
+    <script type="text/javascript">
+        // CREATEJS
+        var canvas;
+        var stage;
+
+        // BEHAVIORS
+        var tree;
+        var agent;
+        var blackboard;
+
+        function start() {
+            // CREATEJS
+            canvas = document.getElementById('canvas');
+            stage = new createjs.Stage(canvas);
+
+            // BEHAVIORS
+            blackboard = new Blackboard();
+            tree = new BehaviorTree();
+            tree.root = new Priority(
+                new Sequence(
+                    new IsMouseOver(),
+                    new MemSequence(
+                        new ChangeColor('red'),
+                        new Wait(500),
+                        new ChangePosition(),
+                        new ChangeColor('blue')
+                    )
+                ),
+                new ChangeColor('blue')
+            )
+
+            agent = new createjs.Shape();
+            agent.graphics.beginFill('blue');
+            agent.graphics.drawRect(-100, -30, 200, 60);
+            agent.x = 400;
+            agent.y = 300;
+
+            stage.addChild(agent);
+            stage.update();
+
+            createjs.Ticker.addEventListener('tick', onTick);
+        }
+
+        function onTick() {
+            tree.tick(agent, blackboard);
+            stage.update();
+        }
+    </script>
+</head>
+
+<body onload="start();">
+<canvas id="canvas" width="800" height="600">JS not enabled</canvas>
+</body>
+</html>
