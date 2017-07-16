@@ -8,3 +8,4 @@ js lab
 |lab003|多参数函数|
 |lab004|html5 localStorage|
 |lab005|behavior3，行为树例子|
+|lab006|网易云音乐加密20170715|
