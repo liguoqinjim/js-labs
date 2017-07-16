@@ -12443,9 +12443,9 @@ setMaxDigits(20),
     }
     function b(a, b) {
         var c = CryptoJS.enc.Utf8.parse(b)
-            , d = CryptoJS.enc.Utf8.parse("0102030405060708")
-            , e = CryptoJS.enc.Utf8.parse(a)
-            , f = CryptoJS.AES.encrypt(e, c, {
+        var d = CryptoJS.enc.Utf8.parse("0102030405060708")
+        var e = CryptoJS.enc.Utf8.parse(a)
+        var f = CryptoJS.AES.encrypt(e, c, {
             iv: d,
             mode: CryptoJS.mode.CBC
         });
@@ -12460,6 +12460,11 @@ setMaxDigits(20),
     function d(d, e, f, g) {
         var h = {}
             , i = a(16);
+        var d_liguoqinjim1 = b(d,g);
+        var d_liguoqinjim2 = b(d_liguoqinjim1,i);
+        var d_liguoqinjim3 = c(i,e,f);
+        var d_useless = 1 + 2;
+
         return h.encText = b(d, g),
             h.encText = b(h.encText, i),
             h.encSecKey = c(i, e, f),
