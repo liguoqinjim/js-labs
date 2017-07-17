@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/crypto-js/3.1.9/aes.min.js"></script>
+    <script src="http://cdn.bootcss.com/crypto-js/3.1.9/core.min.js"></script>
+    <script src="test.js"></script>
+</head>
+<body>
+<div>
+    <form>
+        key:<input id="key" type="text"><br>
+        iv:<input id="iv" type="text"><br>
+        <button id="btn1">加密</button> &nbsp;
+        <button id="btn2">解密</button>
+        <br>
+        密文:<input id="encode" type="text"><br>
+        明文:<input id="decode" type="text"><br>
+    </form>
+</div>
+
+
+
+<script>
+//a = "{"rid":"R_SO_4_186016","offset":"60","total":"false","limit":"20","csrf_token":""}", b = "0CoJUm6Qyw8W8jud"
+
+
+//key: var c = CryptoJS.enc.Utf8.parse(b)
+//
+
+//iv CryptoJS.enc.Utf8.parse("0102030405060708")
+//工作模式 CBC
+
+//结果
+//gHPVST6jk9PvEgIDjnZzQuIztycxh3ejAG+RWP5JSyz1R3iKTyH5wF1LA5ULecu9d2cbAhpuYK0ecFuqCK5PEeSWS00U3hzB9mg0fSYOxVVT7m0YlSBNRqWhnZU7wKDT
+
+</script>
+</body>
+</html>
