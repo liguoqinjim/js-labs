@@ -11743,7 +11743,11 @@ CryptoJS.lib.Cipher || function(u) {
         bar0x: function(e) {
             return {
                 encrypt: function(b, k, d) {
-                    return ("string" == typeof k ? c : a).encrypt(e, b, k, d)
+                    var liguoqinjim_typeof = ("string" == typeof k);
+                    var liguoqinjim_e = e;
+                    var liguoqinjim_encrypt = ("string" == typeof k ? c : a).encrypt(e, b, k, d);
+                    return liguoqinjim_encrypt;
+                    // return ("string" == typeof k ? c : a).encrypt(e, b, k, d)
                 },
                 decrypt: function(b, k, d) {
                     return ("string" == typeof k ? c : a).decrypt(e, b, k, d)
@@ -11851,6 +11855,12 @@ CryptoJS.lib.Cipher || function(u) {
         stringify: function(a) {
             var b = a.ciphertext;
             a = a.salt;
+            // var s_liguqoinjim = s.create([1398893684, 1701076831]);
+            // var s_liguoqinjim1 = s_liguqoinjim.concat(a);
+            // var s_liguoqinjim2 = s_liguoqinjim1.concat(b);
+            // var return_liguoqnijim1 = s_liguoqinjim1.toString(r);
+            // var return_liguoqinjim2 = b.toString(r);
+
             return (a ? s.create([1398893684, 1701076831]).concat(a).concat(b) : b).toString(r)
         },
         parse: function(a) {
