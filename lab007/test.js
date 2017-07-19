@@ -20,6 +20,13 @@ $(function () {
         var b_liguoqinjim = f.toString(CryptoJS.enc.Base64);
         console.log(b_liguoqinjim);
     });
+
+
+    //测试加密
+    $btn3 = $("#btn3")
+    $btn3.click(function () {
+        
+    });
 });
 
 //a="{"rid":"R_SO_4_186016","offset":"60","total":"false","limit":"20","csrf_token":""}",b="0CoJUm6Qyw8W8jud"
