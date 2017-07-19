@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="http://cdn.bootcss.com/crypto-js/3.1.2/rollups/aes.js"></script>
+<script>
+    var message = "helloworld123456";
+
+    var key = "example key 2234"; //length=22
+    var iv = "5efd3f6060e20330"; //length=22
+
+//    key = CryptoJS.enc.Base64.parse(key); // length=16 bytes
+    key_str = key.toString();
+    console.log("key_str=" + key_str);
+    console.log("key_str.length=" + key_str.length);
+    key_str = key_str.slice(0, 16);
+    console.log("key_16=" + key_str);
+
+//    iv = CryptoJS.enc.Base64.parse(iv); // length=16 bytes
+    iv_str = iv.toString();
+    console.log("iv_str=" + iv_str);
+    console.log("iv_str.length=" + iv_str.length);
+    iv_str = iv_str.slice(0, 16);
+    console.log("iv_16=" + iv_str);
+
+    var cipherData = CryptoJS.AES.encrypt(message, key, {iv: iv, mode: CryptoJS.mode.CBC});
+    cipherData_str = cipherData.toString();
+    console.log("cipherData_str=" + cipherData_str);
+    console.log("cipherData_str.length=", cipherData_str.length);
+
+
+//    key = CryptoJS.enc.Base64.parse(key); // length = 16 bytes
+//    iv = CryptoJS.enc.Base64.parse(iv); // length = 18 bytes
+    var data = CryptoJS.AES.decrypt(cipherData, key, {iv: iv});
+    console.log(data.toString(CryptoJS.enc.Utf8));
+</script>
+</body>
+</html>
