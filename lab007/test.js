@@ -14,7 +14,7 @@ $(function () {
         console.log(e);
         var f = CryptoJS.AES.encrypt(e, c, {
             iv: d,
-            mode: CryptoJS.mode.CBC
+            mode: CryptoJS.mode.CBC,
         });
         console.log(f);
         var b_liguoqinjim = f.toString(CryptoJS.enc.Base64);
@@ -25,7 +25,28 @@ $(function () {
     //测试加密
     $btn3 = $("#btn3")
     $btn3.click(function () {
-        
+        var str = "helloworld";
+        var key = "xphone123";
+        var iv = "0102030405060708";
+
+        str = CryptoJS.enc.Utf8.parse(str);
+        key = CryptoJS.enc.Utf8.parse(key);
+        iv = CryptoJS.enc.Utf8.parse(iv);
+
+        var f = CryptoJS.AES.encrypt(str,key,{
+            iv : iv,
+            mode :CryptoJS.mode.CBC,
+
+        });
+        var text = CryptoJS.enc.Base64.stringify(f.ciphertext);
+        console.log(text);
+
+        //解密
+        var w = CryptoJS.AES.decrypt(f,key,{
+            iv : iv,
+            mode :CryptoJS.mode.CBC
+        });
+        console.log(w.toString(CryptoJS.enc.Utf8));
     });
 });
 

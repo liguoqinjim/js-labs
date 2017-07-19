@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="http://cdn.bootcss.com/crypto-js/3.1.2/rollups/aes.js"></script>
+<script>
+    //    var ciphertext = CryptoJS.AES.encrypt('helloworld', 'xphone123');
+    //
+    //    console.log("密文:" + ciphertext.toString());
+    //    // Decrypt
+    //    var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), 'xphone123');
+    //    var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+    //
+    //    console.log(plaintext);
+
+
+    //
+    var message = "some_secret_message";
+
+    var key = "6Le0DgMTAAAAANokdEEial"; //length=22
+    var iv = "mHGFxENnZLbienLyANoi.e"; //length=22
+
+    key = CryptoJS.enc.Base64.parse(key); // length=16 bytes
+    //key is now e8b7b40e031300000000da247441226a5d, length=32 (hex encoded)
+    key_str = key.toString();
+    console.log("key_str=" + key_str);
+    console.log("key_str.length=" + key_str.length);
+
+    iv = CryptoJS.enc.Base64.parse(iv); // length=16 bytes
+    //iv is now 987185c4436764b6e27a72f2fffffffd, length=32 (hex encoded)
+    iv_str = iv.toString();
+    console.log("iv_str=" + iv_str);
+    console.log("iv_str.length=" + iv_str.length);
+
+    var cipherData = CryptoJS.AES.encrypt(message, key, {iv: iv});
+    cipherData_str = cipherData.toString();
+    console.log("cipherData_str="+cipherData_str);
+    console.log("cipherData_str.length=",cipherData_str.length);
+
+    var key = "6Le0DgMTAAAAANokdEEial"; //length=22
+    var iv = "mHGFxENnZLbienLyANoi.e123"; //length=25
+
+    key = CryptoJS.enc.Base64.parse(key); // length = 16 bytes
+    //key is now e8b7b40e031300000000da247441226a5d, length=32 (hex encoded)
+    iv = CryptoJS.enc.Base64.parse(iv); // length = 18 bytes
+    //iv is now 987185c4436764b6e27a72f2fffffffded76, length=36 (hex encoded)
+
+    var data = CryptoJS.AES.decrypt(cipherData, key, {iv: iv}); //data contains "some_secret_message", so additional "123" in IV is irrelevant.
+    console.log(data.toString(CryptoJS.enc.Utf8));
+</script>
+</body>
+</html>
