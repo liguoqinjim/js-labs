@@ -23,8 +23,8 @@
     console.log("wordArray_hex1:" + wordArray);//正确
     console.log("wordArray_hex2:" + wordArray.toString(CryptoJS.enc.Hex));//正确 hex编码
     console.log("wordArray_base64:" + wordArray.toString(CryptoJS.enc.Base64));//正确 base64编码
-    console.log("wordArray_utf8:" + wordArray.toString(CryptoJS.enc.Utf8));//正确 原文
-
+    console.log("wordArray_utf8_1:" + wordArray.toString(CryptoJS.enc.Utf8));//正确 原文
+    console.log("wordArray_utf8_2:" + CryptoJS.enc.Utf8.stringify(wordArray));//正确 原文
 
     //正确
     //var hash = CryptoJS.SHA256("Message");
