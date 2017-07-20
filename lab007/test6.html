@@ -7,25 +7,26 @@
 <body>
 
 <script src="http://cdn.bootcss.com/crypto-js/3.1.2/rollups/aes.js"></script>
-<script src="http://cdn.bootcss.com/crypto-js/3.1.2/components/enc-base64-min.js"></script>
-<script src="http://cdn.bootcss.com/crypto-js/3.1.2/components/format-hex-min.js"></script>
-<script src="http://cdn.bootcss.com/crypto-js/3.1.2/rollups/sha256.js"></script>
+<!--<script src="http://cdn.bootcss.com/crypto-js/3.1.2/components/enc-base64-min.js"></script>-->
+<!--<script src="http://cdn.bootcss.com/crypto-js/3.1.2/components/format-hex-min.js"></script>-->
+<!--<script src="http://cdn.bootcss.com/crypto-js/3.1.2/rollups/sha256.js"></script>-->
 <script>
     var message = "Hello Gopher!";
     console.log("message:" + message);
-    message_hex = message.toString(CryptoJS.enc.Hex);
+    message_hex = message.toString(CryptoJS.enc.Hex);//无效
     console.log("message_hex:" + message_hex);
-    message_hex2 = CryptoJS.enc.Hex.stringify(message);
+
+    message_hex2 = CryptoJS.enc.Hex.stringify(message);//无效
     console.log("message_hex2:" + message_hex2);
+
     var wordArray = CryptoJS.enc.Utf8.parse(message);
-    console.log("wordArray:" + wordArray);
+    console.log("wordArray_hex1:" + wordArray);//正确
+    console.log("wordArray_hex2:" + wordArray.toString(CryptoJS.enc.Hex));//正确 hex编码
+    console.log("wordArray_base64:" + wordArray.toString(CryptoJS.enc.Base64));//正确 base64编码
+    console.log("wordArray_utf8:" + wordArray.toString(CryptoJS.enc.Utf8));//正确 原文
 
 
-    //    message_hex = CryptoJS.enc.Hex.parse(message);
-    //    console.log("message_hex:" + message_hex);
-    //    message_base64 = CryptoJS.enc.Base64.parse(message);
-    //    console.log("message_base64:" + message_base64);
-
+    //正确
     //var hash = CryptoJS.SHA256("Message");
     //alert(hash.toString(CryptoJS.enc.Base64)); // L3dmip37+NWEi57rSnFFypTG7ZI25Kdz9tyvpRMrL5E=
     //alert(hash.toString(CryptoJS.enc.Latin1));
