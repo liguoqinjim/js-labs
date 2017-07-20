@@ -12,15 +12,17 @@
 
     var key = "example key 2234"; //length=22
     var iv = "5efd3f6060e20330"; //length=22
+//    iv = CryptoJS.enc.Hex.parse("0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f");
+    var iv = CryptoJS.enc.Hex.parse('1234561234567890');
 
-//    key = CryptoJS.enc.Base64.parse(key); // length=16 bytes
+    //    key = CryptoJS.enc.Base64.parse(key); // length=16 bytes
     key_str = key.toString();
     console.log("key_str=" + key_str);
     console.log("key_str.length=" + key_str.length);
     key_str = key_str.slice(0, 16);
     console.log("key_16=" + key_str);
 
-//    iv = CryptoJS.enc.Base64.parse(iv); // length=16 bytes
+    //    iv = CryptoJS.enc.Base64.parse(iv); // length=16 bytes
     iv_str = iv.toString();
     console.log("iv_str=" + iv_str);
     console.log("iv_str.length=" + iv_str.length);
@@ -28,15 +30,25 @@
     console.log("iv_16=" + iv_str);
 
     var cipherData = CryptoJS.AES.encrypt(message, key, {iv: iv, mode: CryptoJS.mode.CBC});
-    cipherData_str = cipherData.toString();
-    console.log("cipherData_str=" + cipherData_str);
-    console.log("cipherData_str.length=", cipherData_str.length);
+    console.log(cipherData.ciphertext.toString());
+    console.log(cipherData.toString());
 
 
-//    key = CryptoJS.enc.Base64.parse(key); // length = 16 bytes
-//    iv = CryptoJS.enc.Base64.parse(iv); // length = 18 bytes
+//    console.log("cipherDa"cipherData.ciphertext.toString(CryptoJS.enc.Hex));
+//    cipherData_str = cipherData.toString();
+//    console.log("cipherData_str=" + cipherData_str);
+//    console.log("cipherData_str.length=", cipherData_str.length);
+
+
+    //    key = CryptoJS.enc.Base64.parse(key); // length = 16 bytes
+    //    iv = CryptoJS.enc.Base64.parse(iv); // length = 18 bytes
     var data = CryptoJS.AES.decrypt(cipherData, key, {iv: iv});
     console.log(data.toString(CryptoJS.enc.Utf8));
+
+    //测试数据
+//    var a2 = "8ac07b71af44757295f98fbcf9591d3fd58abec9e315f0347e234ff92fa247ee";
+//    var data2 = CryptoJS.AES.decrypt(a2, key);
+//    console.log(data2.toString());
 </script>
 </body>
 </html>

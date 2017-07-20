@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="http://cdn.bootcss.com/crypto-js/3.1.2/rollups/aes.js"></script>
+<script src="http://cdn.bootcss.com/crypto-js/3.1.2/components/enc-base64-min.js"></script>
+<script src="http://cdn.bootcss.com/crypto-js/3.1.2/components/format-hex-min.js"></script>
+<script src="http://cdn.bootcss.com/crypto-js/3.1.2/rollups/sha256.js"></script>
+<script>
+    var message = "Hello Gopher!";
+    console.log("message:" + message);
+    message_hex = message.toString(CryptoJS.enc.Hex);
+    console.log("message_hex:" + message_hex);
+    message_hex2 = CryptoJS.enc.Hex.stringify(message);
+    console.log("message_hex2:" + message_hex2);
+    var wordArray = CryptoJS.enc.Utf8.parse(message);
+    console.log("wordArray:" + wordArray);
+
+
+    //    message_hex = CryptoJS.enc.Hex.parse(message);
+    //    console.log("message_hex:" + message_hex);
+    //    message_base64 = CryptoJS.enc.Base64.parse(message);
+    //    console.log("message_base64:" + message_base64);
+
+    //var hash = CryptoJS.SHA256("Message");
+    //alert(hash.toString(CryptoJS.enc.Base64)); // L3dmip37+NWEi57rSnFFypTG7ZI25Kdz9tyvpRMrL5E=
+    //alert(hash.toString(CryptoJS.enc.Latin1));
+    //alert(hash.toString(CryptoJS.enc.Hex)); // 2f77668a9dfbf8d5848b9eeb4a7145ca94c6ed9236e4a773f6dcafa5132b2f91
+</script>
+</body>
+</html>
