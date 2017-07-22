@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab002</title>
+</head>
+<body>
+
+<script src="http://cdn.bootcss.com/crypto-js/3.1.2/rollups/aes.js"></script>
+<script>
+    var message = "helloworld123456";
+    var key = CryptoJS.enc.Hex.parse('example0key01234');
+    var iv = CryptoJS.enc.Hex.parse('0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f');
+    //    var iv = CryptoJS.enc.Hex.parse('1234561234567890');
+
+    //加密
+    var encrypted = CryptoJS.AES.encrypt(message, key, {
+        iv: iv,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.PC
+    });
+    console.log("encrypted1:" + encrypted.ciphertext.toString());
+    console.log("encrypted2:" + encrypted.toString());
+    var encrypted_hex = encrypted.ciphertext.toString(CryptoJS.enc.Hex);
+    console.log("encrypted_hex:" + encrypted_hex);
+    var encrypted_base64 = encrypted.ciphertext.toString(CryptoJS.enc.Base64);
+    console.log("encrypted_base64:" + encrypted_base64);
+
+    //解密
+    var decrypted = CryptoJS.AES.decrypt(encrypted, key, {
+        iv: iv,
+        mode: CryptoJS.mode.CBC,
+    });
+    console.log(decrypted.toString());
+    var decrypted_utf8 = decrypted.toString(CryptoJS.enc.Utf8);
+    console.log("decrypted_utf8:" + decrypted_utf8);
+    var decrypted_hex = decrypted.toString(CryptoJS.enc.Hex);
+    console.log("decrypted_hex:" + decrypted_hex);
+    var decrypted_base64 = decrypted.toString(CryptoJS.enc.Base64);
+    console.log("decrypted_base64:" + decrypted_base64);
+</script>
+</body>
+</html>
