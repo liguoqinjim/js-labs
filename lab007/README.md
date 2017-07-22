@@ -3,6 +3,7 @@
 |文件|简介|
 |---|---|
 |test6.html|测试cryptojs各种编码|
+|test7.html|aes加密|
 
 
 #### test6.html
