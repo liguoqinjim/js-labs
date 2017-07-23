@@ -54,6 +54,7 @@
 
     //解密，直接用加密过的字符串解密
     //04e911726f008a0db781d6ecb24064da66dd13a51f95429ef56f4673b6cb39e6 就是这面加密出来的结果
+    //外部网站加密结果：674b1e53c6b6e59fea9ef0383a0fb26051cb42c83526544230b7006b425ba233
     var decrypted_data = "04e911726f008a0db781d6ecb24064da66dd13a51f95429ef56f4673b6cb39e6";
     //这里要创建cipherParams
     var cipherParams = CryptoJS.lib.CipherParams.create({
@@ -66,7 +67,6 @@
         padding: CryptoJS.pad.Pkcs7
     });
     console.log("decrypted_str:", decrypted_str.toString(CryptoJS.enc.Utf8));
-
 </script>
 </body>
 </html>
