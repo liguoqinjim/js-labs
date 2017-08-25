@@ -9630,8 +9630,10 @@ setMaxDigits(20), dpl10 = 15, lr10 = biFromNumber(1e15), hexatrigesimalToChar = 
     }
 
     function b(a, b) {
-        var c = CryptoJS.enc.Utf8.parse(b), d = CryptoJS.enc.Utf8.parse("0102030405060708"),
-            e = CryptoJS.enc.Utf8.parse(a), f = CryptoJS.AES.encrypt(e, c, {iv: d, mode: CryptoJS.mode.CBC});
+        var c = CryptoJS.enc.Utf8.parse(b);
+        var d = CryptoJS.enc.Utf8.parse("0102030405060708");
+        var e = CryptoJS.enc.Utf8.parse(a);
+        var f = CryptoJS.AES.encrypt(e, c, {iv: d, mode: CryptoJS.mode.CBC});
         return f.toString()
     }
 
@@ -9642,7 +9644,9 @@ setMaxDigits(20), dpl10 = 15, lr10 = biFromNumber(1e15), hexatrigesimalToChar = 
 
     function d(d, e, f, g) {
         var h = {}, i = a(16);
-        console.log("liguoqinjim" + d);
+        //liguoqinjim 标记
+        var liguoqinjim = 1;
+
         return h.encText = b(d, g), h.encText = b(h.encText, i), h.encSecKey = c(i, e, f), h
     }
 

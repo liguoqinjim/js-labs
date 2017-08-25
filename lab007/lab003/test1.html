@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab001</title>
+</head>
+<body>
+
+<script src="http://cdn.bootcss.com/crypto-js/3.1.2/rollups/aes.js"></script>
+<script>
+    //    var message = "Hello Gopher!";
+    //    console.log("message:" + message);
+    //    message_hex = message.toString(CryptoJS.enc.Hex);//无效
+    //    console.log("message_hex:" + message_hex);
+    //
+    //    message_hex2 = CryptoJS.enc.Hex.stringify(message);//无效
+    //    console.log("message_hex2:" + message_hex2);
+    //
+    //    //正确处理
+    //    var wordArray = CryptoJS.enc.Utf8.parse(message);
+    //    console.log("wordArray_hex1:" + wordArray);//正确
+    //    console.log("wordArray_hex2:" + wordArray.toString(CryptoJS.enc.Hex));//正确 hex编码
+    //    console.log("wordArray_base64:" + wordArray.toString(CryptoJS.enc.Base64));//正确 base64编码
+    //    console.log("wordArray_utf8_1:" + wordArray.toString(CryptoJS.enc.Utf8));//正确 原文
+    //    console.log("wordArray_utf8_2:" + CryptoJS.enc.Utf8.stringify(wordArray));//正确 原文
+    //
+    //    //正确
+    //    //var hash = CryptoJS.SHA256("Message");
+    //    //alert(hash.toString(CryptoJS.enc.Base64)); // L3dmip37+NWEi57rSnFFypTG7ZI25Kdz9tyvpRMrL5E=
+    //    //alert(hash.toString(CryptoJS.enc.Latin1));
+    //    //alert(hash.toString(CryptoJS.enc.Hex)); // 2f77668a9dfbf8d5848b9eeb4a7145ca94c6ed9236e4a773f6dcafa5132b2f91
+
+    var message = "0CoJUm6Qyw8W8jud";
+    var c = CryptoJS.enc.Utf8.parse(message);
+    console.log(c);
+
+    var message2 = "0102030405060708";
+    var d = CryptoJS.enc.Utf8.parse(message2);
+    console.log(d);
+
+    var message3 = '{"rid":"R_SO_4_186016","offset":"40","total":"false","limit":"20","csrf_token":""}';
+    var e = CryptoJS.enc.Utf8.parse(message3);
+    console.log(e);
+
+    var f = CryptoJS.AES.encrypt(e, c, {iv: d, mode: CryptoJS.mode.CBC})
+    console.log(f);
+    var returnF = f.toString();
+    console.log(returnF);
+
+    var rightF = "gHPVST6jk9PvEgIDjnZzQuIztycxh3ejAG+RWP5JSyyVwsOW8uw8oCdimdcI/B24Mf63AN2q6ZxNNhKnBhQitlLS6T3YIVD60zPNr4TwFqypYjCXl/Tt9aUC8bCejthV";
+    if (returnF == rightF) {
+        console.log("验证通过");
+    } else {
+        console.log("验证不通过");
+    }
+
+</script>
+</body>
+</html>
