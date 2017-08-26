@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab009->lab001</title>
+</head>
+<body>
+
+<script src="../js/BigInt.js"></script>
+<!--<script src="../js/RSA.js"></script>-->
+<script src="../js/RSA_Stripped.js"></script>
+<script src="../js/Barrett.js"></script>
+
+
+<script>
+    setMaxDigits(19);
+    key = new RSAKeyPair(
+        "10001",
+        "202700adbd85e2d7182720c3a0ee19c1",
+        "30db31542ace0f7d37a629ee5eba28cb"
+    );
+
+    var encryptedString1 = encryptedString(key, "String");
+    console.log(encryptedString1);
+
+    var decryptedString2 = decryptedString(key, encryptedString1);
+    console.log(decryptedString2);
+
+</script>
+
+</body>
+</html>
