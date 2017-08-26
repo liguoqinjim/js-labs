@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab001</title>
+</head>
+<body>
+
+<script src="http://cdn.bootcss.com/crypto-js/3.1.2/rollups/aes.js"></script>
+<script>
+    var message = "G5XF72IowaN5HZd6";
+    var c = CryptoJS.enc.Utf8.parse(message);
+    console.log(c);
+
+    var message2 = "0102030405060708";
+    var d = CryptoJS.enc.Utf8.parse(message2);
+    console.log(d);
+
+    var message3 = "gHPVST6jk9PvEgIDjnZzQuIztycxh3ejAG+RWP5JSyz1R3iKTyH5wF1LA5ULecu9d2cbAhpuYK0ecFuqCK5PEeSWS00U3hzB9mg0fSYOxVVT7m0YlSBNRqWhnZU7wKDT";
+    var e = CryptoJS.enc.Utf8.parse(message3);
+    console.log(e);
+
+    var f = CryptoJS.AES.encrypt(e, c, {iv: d, mode: CryptoJS.mode.CBC})
+    console.log(f);
+    var returnF = f.toString();
+    console.log(returnF);
+
+    var rightF = "uI/BuRq2DWoz97/L/JpJlVRUoL2j7hzg1jiycJlPOhMCduqnx5xHOFWO24UTUUdTLqjIsMyU2NuJmZQtX6VOBxeTV/NPyCxaVMs0WZ6fK+wyO+yLLkcQCOfnsPnZq6tQCNM7am2BZkDQhH8hiaNLScuqHAjKSl1CCRl6rf4LGJzNfPqECqB/mHIH2n+8VUfs";
+    if (returnF == rightF) {
+        console.log("验证通过");
+    } else {
+        console.log("验证不通过");
+    }
+
+</script>
+</body>
+</html>
