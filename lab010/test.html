@@ -7,10 +7,54 @@
 <body>
 
 <script src="http://cdn.bootcss.com/crypto-js/3.1.2/rollups/aes.js"></script>
-<script src="../js/BigInt.js"></script>
+<script src="js/BigInt.js"></script>
 <!--<script src="../js/RSA.js"></script>-->
-<script src="../js/RSA_Stripped.js"></script>
-<script src="../js/Barrett.js"></script>
+<script src="js/RSA_Stripped.js"></script>
+<script src="js/Barrett.js"></script>
+
+<script>
+    //加密需要用的初始数据
+    var d = '{"rid":"R_SO_4_186016","offset":"100","total":"false","limit":"20","csrf_token":""}';
+    var e = "010001";
+    var f = "00e0b509f6259df8642dbc35662901477df22677ec152b5ff68ace615bb7b725152b3ab17a876aea8a5aa76d2e417629ec4ee341f56135fccf695280104e0312ecbda92557c93870114af6c9d05c4f7f0c3685b7a46bee255932575cce10b424d813cfe4875d3e82047b97ddef52741d546b8e289dc6935b3ece0462db0a22b8e7";
+    var g = "0CoJUm6Qyw8W8jud";
+
+    //一个随机函数
+    function a(a) {
+        var d, e, b = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", c = "";
+        for (d = 0; a > d; d += 1) e = Math.random() * b.length, e = Math.floor(e), c += b.charAt(e);
+        return c
+    }
+
+    var i = a(16);
+
+    function b(a, b) {
+        var c = CryptoJS.enc.Utf8.parse(b);
+        var d = CryptoJS.enc.Utf8.parse("0102030405060708");
+        var e = CryptoJS.enc.Utf8.parse(a);
+        var f = CryptoJS.AES.encrypt(e, c, {iv: d, mode: CryptoJS.mode.CBC});
+        return f.toString()
+    };
+
+    function c(a, b, c) {
+        var d, e;
+        return setMaxDigits(131), d = new RSAKeyPair(b, "", c), e = encryptedString(d, a)
+    };
+
+    //开始计算encText
+    var encText = b(d, g);
+    encText = b(encText, i);
+
+    //开始计算encSecKey
+    var encSecKey = c(i, e, f);
+
+    //输出
+    console.log(encText);
+    console.log(encSecKey);
+
+    //RMAm50zNyfgBIVpWXCG+D2wHerokhGovn3GgmU7vYh87z20pj5KYuMufqdnMqHnjDqDxdkje5wjYNUOjZImYQtFQo6GmTrQtgv6qkqg9j+3tRz4/St2fAcx3bwM/tWtEw7MmuVe4RThlisKOW9/UvP/JE72+RA30f1XX2bTviA2ZcspVgmyBTkW9kxkV3soX
+    //d384ae105643f922fdd1a30e37141d7e095536e3a114520f3f13138df404b756403c2ee3404875a425febf1fd6d719b60720d3f657369af1d9b78953567da759e1372c35b058e47d779cfe2998937b3695b7c63eeea8fdb5ffabd936d899b166234c3acc96935e625656f013174791c4f25e9661e59a554613adfe0427dcd16c
+</script>
 
 </body>
 </html>
