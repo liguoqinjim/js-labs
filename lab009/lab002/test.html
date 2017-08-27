@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab009->lab002</title>
+</head>
+<body>
+
+<script src="../js/BigInt.js"></script>
+<!--<script src="../js/RSA.js"></script>-->
+<script src="../js/RSA_Stripped.js"></script>
+<script src="../js/Barrett.js"></script>
+
+
+<script>
+    setMaxDigits(131);
+    key = new RSAKeyPair(
+        "010001",
+        "",
+        "00e0b509f6259df8642dbc35662901477df22677ec152b5ff68ace615bb7b725152b3ab17a876aea8a5aa76d2e417629ec4ee341f56135fccf695280104e0312ecbda92557c93870114af6c9d05c4f7f0c3685b7a46bee255932575cce10b424d813cfe4875d3e82047b97ddef52741d546b8e289dc6935b3ece0462db0a22b8e7"
+    );
+
+    var encryptedString1 = encryptedString(key, "cb7RKns8QpeO0a07");
+    console.log(encryptedString1);
+
+</script>
+
+</body>
+</html>
