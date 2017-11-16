@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="myCanvas" width="300" height="400">
+    easeljs简单使用
+</canvas>
+
+<!-- 推荐开源CDN来选取需引用的外部JS //-->
+<script src="http://cdn.gbtags.com/EaselJS/0.7.1/easeljs.min.js"></script>
+<script>
+    //获取stage
+    var canvas = document.getElementById("myCanvas");
+    var stage = new createjs.Stage(canvas);
+    var radius = 20;
+    var colors = ["#828b20", "#b0ac31", "#cbc53d", "#fad779", "#f9e4ad", "#faf2db", "#563512", "#222222"];
+
+    for(var i=0;i<500;i++){
+        var shape = new createjs.Shape();
+        shape.graphics.beginFill(colors[Math.random() * colors.length | 0]).drawCircle(0, 0, radius);
+
+        //修改图形坐标
+        shape.x = Math.floor(Math.random() * 200);
+        shape.y = Math.floor(Math.random() * 350);
+        shape.velX = Math.random() * 10 - 5;
+        shape.velY = Math.random() * 10 - 5;
+        shape.alpha = Math.random() * 1;
+
+        //尝试注释掉如下cache代码，比较一下FPS值的区别和动画性能区别
+        shape.cache(-radius, -radius, radius * 2, radius * 2);
+
+        stage.addChild(shape);
+    }
+
+    //添加一个FPS，比较一下性能区别
+    var fpsLabel = new createjs.Text("-- fps", "normal 24px Arial", "#FFF");
+    stage.addChild(fpsLabel);
+    fpsLabel.x = 10;
+    fpsLabel.y = 20;
+
+    createjs.Ticker.addEventListener("tick", tick);
+
+    function tick(event) {
+        var w = canvas.width + radius * 2;
+        var h = canvas.height + radius * 2;
+        var l = stage.getNumChildren() - 1;
+
+        for (var i = 1; i < l; i++) {
+            var shape = stage.getChildAt(i);
+            shape.x = (shape.x + radius + shape.velX + w) % w - radius;
+            shape.y = (shape.y + radius + shape.velY + h) % h - radius;
+        }
+
+        fpsLabel.text = Math.round(createjs.Ticker.getMeasuredFPS()) + " fps";
+
+        stage.update(event);
+    }
+
+</script>
+</body>
+</html>

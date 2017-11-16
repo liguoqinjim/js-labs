@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>鼠标点击图形，查看图形整体运动效果</p>
+
+<canvas id="myCanvas" width="350" height="400">
+    easeljs简单使用
+</canvas>
+
+<!-- 推荐开源CDN来选取需引用的外部JS //-->
+<script src="http://cdn.gbtags.com/EaselJS/0.7.1/easeljs.min.js"></script>
+<script>
+
+    window.onload=function(){
+        var canvas = document.getElementById("myCanvas");
+        var stage = new createjs.Stage(canvas);
+
+        //创建容器
+        var container = new createjs.Container();
+        //添加容器到stage
+        stage.addChild(container);
+
+        stage.on("stagemousedown",moveContainer,null,false);
+
+        function setup(){
+            for(var i = 0;i<3;i++){
+                var tempBitMap = new createjs.Bitmap('http://www.gbtags.com/gb/laitu/180x130&text=GBtags/222222/FFFFFF');
+                tempBitMap.x = 0;
+                tempBitMap.y = i * 140;
+
+                //添加图片到容器
+                container.addChild(tempBitMap);
+            }
+            stage.update();
+            setTimeout(function(){stage.update()},1500);
+        }
+
+        //鼠标点击后出发的容器移动方法
+        function moveContainer(){
+            container.x +=20;
+            stage.update();
+        }
+
+        setup();
+
+
+    }
+
+</script>
+</body>
+</html>

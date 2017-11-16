@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="myCanvas" width="350" height="400">
+    easeljs简单使用
+</canvas>
+
+<!-- 推荐开源CDN来选取需引用的外部JS //-->
+<script src="http://cdn.gbtags.com/EaselJS/0.7.1/easeljs.min.js"></script>
+<script>
+    /*Javascript代码片段*/
+
+    window.onload=function(){
+        //获取stage
+        var canvas = document.getElementById("myCanvas");
+        var stage = new createjs.Stage(canvas);
+
+        //绘制10个随机属性的文字
+        function drawText(){
+            for(var i=0;i<10;i++){
+                var theText = new createjs.Text("极客标签","normal 32px microsoft yahei","#222222");
+                theText.x = Math.floor(Math.random() * 350);
+                theText.y = Math.floor(Math.random() * 400);
+                theText.rotation = Math.floor(Math.random() * 360);
+                theText.alpha = Math.random() * 1;
+                theText.color = "#"+Math.floor(Math.random()*16777215).toString(16);
+                stage.addChild(theText);
+                stage.update();
+            }
+
+        }
+
+        //生成文字
+        drawText();
+
+    }
+
+
+
+</script>
+</body>
+</html>

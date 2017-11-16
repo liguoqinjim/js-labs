@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="myCanvas" width="350" height="400">
+    easeljs简单使用
+</canvas>
+
+<!-- 推荐开源CDN来选取需引用的外部JS //-->
+<script src="http://cdn.gbtags.com/EaselJS/0.7.1/easeljs.min.js"></script>
+<script>
+    /*Javascript代码片段*/
+
+    window.onload=function(){
+        //获取stage
+        var canvas = document.getElementById("myCanvas");
+        var stage = new createjs.Stage(canvas);
+
+        var img = new Image();
+        img.src = "http://www.gbtags.com/gb/laitu/200x200&text=GBtags/444444/ffffff";
+        img.onload = handleImageLoad;
+
+        //添加并且处理图片相关属性
+        function handleImageLoad(){
+            for(var i = 0;i<3;i++){
+                var tempBitMap = new createjs.Bitmap(img);
+                var randX = Math.floor(Math.random()* 500);
+                var randY = Math.floor(Math.random() * 250);
+                var randomColor = "#"+Math.floor(Math.random()*16777215).toString(16);
+                var randomXOffset  = Math.floor(Math.random() * 10) + 5;
+                var randomYOffset  = Math.floor(Math.random() * 10) + 5;
+                stage.addChild(tempBitMap);
+                tempBitMap.x = randX;
+                tempBitMap.y = randY;
+                tempBitMap.rotation = Math.floor(Math.random() * 360);
+                tempBitMap.shadow = new createjs.Shadow(randomColor, randomXOffset, randomYOffset, 10);
+            }
+            stage.update();
+        }
+    }
+
+
+</script>
+</body>
+</html>

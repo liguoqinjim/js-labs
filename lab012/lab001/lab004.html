@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="myCanvas" width="350" height="200">
+    easeljs简单使用
+</canvas>
+
+<!-- 推荐开源CDN来选取需引用的外部JS //-->
+<script src="http://cdn.gbtags.com/EaselJS/0.7.1/easeljs.min.js"></script>
+<script>
+    /*Javascript代码片段*/
+    window.onload=function(){
+        //获取stage
+        var canvas = document.getElementById("myCanvas");
+        var stage = new createjs.Stage(canvas);
+
+        function circle(){
+            //生成圆形
+            var circle = new createjs.Shape();
+            circle.graphics.setStrokeStyle(2).beginStroke("rgba(0,0,0,.5)").beginFill("orange").drawCircle(0, 0, 50);
+            circle.x = 55;
+            circle.y = 100;
+
+            //将生成图形添加到stage中，并且调用update方法更新
+            stage.addChild(circle);
+        }
+
+        function rect(){
+            //生成矩形
+            var rect = new createjs.Shape();
+            rect.graphics.beginFill("orange").drawRect(10, 10, 100, 100);
+            rect.x = 120;
+            rect.y = 40;
+
+            //将生成图形添加到stage中，并且调用update方法更新
+            stage.addChild(rect);
+        }
+
+        function polystar(){
+            //生成多角形
+            var polystar = new createjs.Shape();
+            polystar.graphics.setStrokeStyle(5).beginStroke("orange").drawPolyStar(290,100,5,10,10,110);
+
+            stage.addChild(polystar);
+        }
+
+        circle();
+        rect();
+        polystar();
+
+        //添加一个Ticker类帮助避免多次调用update方法
+        createjs.Ticker.addEventListener("tick", handleTicker);
+        function handleTicker(){
+            stage.update();
+        }
+
+
+    }
+</script>
+</body>
+</html>

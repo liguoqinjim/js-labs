@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>
+    请使用鼠标“点击”下图查看滤镜处理后的效果
+</p>
+
+<canvas id="myCanvas" width="350" height="400">
+    easeljs简单使用
+</canvas>
+
+<!-- 推荐开源CDN来选取需引用的外部JS //-->
+<script src="http://cdn.gbtags.com/EaselJS/0.7.1/easeljs.min.js"></script>
+<script>
+    window.onload=function(){
+        var canvas = document.getElementById("myCanvas");
+        stage = new createjs.Stage(canvas)
+
+        stage.on("stagemousedown",colorPicture,null,false);
+        var randNum = Math.random();
+        var windmill;
+        function setup(){
+            windmill = new createjs.Bitmap('http://www.gbtags.com/gb/laitu/350x400');
+            stage.addChild(windmill);
+            stage.update();
+            setTimeout(function(){stage.update()},3000);
+        }
+
+        function colorPicture(){
+            windmill.filters = [new createjs.ColorFilter(1,0,0,1),
+                new createjs.BlurFilter(5, 5, 10)
+            ];
+            windmill.cache(0, 0, 600, 400);
+            stage.update();
+        }
+        setup();
+    }
+</script>
+</body>
+</html>
