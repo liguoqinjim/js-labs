@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="libs/fuse.min.js"></script>
+<script>
+    var books2 = [{
+        'title': "Old Man's War",
+        'author': {
+            'name': 'John Scalzi',
+            'tags': [{
+                value: 'American'
+            }]
+        }
+    }, {
+        'title': 'The Lock Artist',
+        'author': {
+            'name': 'Steve Hamilton',
+            'tags': [{
+                value: 'English'
+            }]
+        }
+    }];
+
+    var books = [{
+        "Frame": 1,
+        "FieldId": 1,
+        "Operator": 1,
+        "PosX": 1856,
+        "PosY": 601
+    }, {
+        "Frame": 1,
+        "FieldId": 2,
+        "Operator": 1,
+        "PosX": 1357,
+        "PosY": 900
+    }, {
+        "Frame": 1,
+        "FieldId": 3,
+        "Operator": 1,
+        "PosX": 1357,
+        "PosY": 600
+    }, {
+        "Frame": 1,
+        "FieldId": 4,
+        "Operator": 1,
+        "PosX": 1357,
+        "PosY": 300
+    }, {
+        "Frame": 1,
+        "FieldId": 5,
+        "Operator": 1,
+        "PosX": 257,
+        "PosY": 1000
+    }, {
+        "Frame": 1,
+        "FieldId": 6,
+        "Operator": 1,
+        "PosX": 257,
+        "PosY": 800
+    }];
+
+    var options = {
+        keys: ['Frame'],
+    };
+    var fuse = new Fuse(books, options);
+    console.log(fuse.search("1"));
+
+</script>
+</body>
+</html>

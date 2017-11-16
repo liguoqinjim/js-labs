@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="libs/fuse.min.js"></script>
+<script>
+    var books = [{
+        'title': "Old Man's War",
+        'author': {
+            'name': 'John Scalzi',
+            'tags': [{
+                value: 'American'
+            }]
+        }
+    }, {
+        'title': 'The Lock Artist',
+        'author': {
+            'name': 'Steve Hamilton',
+            'tags': [{
+                value: 'English'
+            }]
+        }
+    }];
+
+    var options = {
+        keys: ['author.tags.value'],
+    };
+    var fuse = new Fuse(books, options)
+
+    console.log(fuse.search('engsh'));
+</script>
+</body>
+</html>
