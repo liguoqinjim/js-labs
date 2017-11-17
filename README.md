@@ -15,4 +15,6 @@ js lab
 |lab010|网易云音乐加密|
 |lab011|大麦测试|
 |lab012|createjs|
-|lab013|fuse，json|
+|lab013|fuse，json()|
+|lab014|defuant,json(https://github.com/hbi99/defiant.js)|
+|lab015|sprintf.js(https://github.com/alexei/sprintf.js)|
