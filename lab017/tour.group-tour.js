@@ -98,7 +98,10 @@
         return s
     }, f = {
         getState: function (e) {
-            return e ? s[e] : s
+            // return e ? s[e] : s
+
+            //liguoqinjim 修改
+            return e ? s[e] : s;
         }, subscribe: function (e, t) {
             if (t && !t.startsWith("change:") && (t = "change:" + t), "function" != typeof e) throw new Error("Expected listener to be a function.");
             t = t || c, l[t] = l[t] || [], ~l[t].indexOf(e) || l[t].push(e)
@@ -2098,12 +2101,21 @@
     }
 
     function h() {
+        // var e = p(), t = {};
+        // return X.getState("calendar").filter(function (t) {
+        //     return t.departDate >= e.start && t.departDate <= e.end
+        // }).forEach(function (e) {
+        //     t[e.departDate] = e
+        // }), {all: e.all, date: t}
+
+        //liguoqinjim 修改
         var e = p(), t = {};
-        return X.getState("calendar").filter(function (t) {
+        X.getState("calendar").filter(function (t) {
             return t.departDate >= e.start && t.departDate <= e.end
         }).forEach(function (e) {
             t[e.departDate] = e
-        }), {all: e.all, date: t}
+        });
+        return {all: e.all, date: t};
     }
 
     function v() {
@@ -2268,8 +2280,14 @@
                 infinity: 1 / 0
             }))
         }, renderDate: function () {
+            // var e = h();
+            // e.current = X.getState("departDate"), e.today = B, oe.find(".calendar-dates").html(S.template.compile(L["default"])(e))
+
+            //liguoqinjim 修改
             var e = h();
-            e.current = X.getState("departDate"), e.today = B, oe.find(".calendar-dates").html(S.template.compile(L["default"])(e))
+            e.current = X.getState("departDate");
+            e.today = B;
+            oe.find(".calendar-dates").html(S.template.compile(L["default"])(e))
         }, hideDateDetail: function () {
             O.layer.close(re)
         }, showDateDetail: function (e, t) {
