@@ -22,4 +22,5 @@ js lab
 |lab017|途牛js分析|
 |lab018|httpbin模仿|
 |lab019|tool_proxy模板|
-|lab020|运行js速度|
+|lab020|查看一个js的运行速度|
+|lab021|nodejs运行js文件|
