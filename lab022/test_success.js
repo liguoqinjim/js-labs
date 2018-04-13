@@ -4,16 +4,6 @@ code.google.com/p/crypto-js
 (c) 2009-2013 by Jeff Mott. All rights reserved.
 code.google.com/p/crypto-js/wiki/License
 */
-var param = "";
-if (process.argv.length > 2) {
-    process.argv.forEach(function (val, index, array) {
-        console.log(val);
-        if (index == 2) {
-            param = val;
-        }
-    });
-}
-
 var CryptoJS = CryptoJS || function (u, p) {
     var d = {}, l = d.lib = {}, s = function () {
         }, t = l.Base = {
@@ -1366,6 +1356,8 @@ function c(a, b, c) {
 
 
 function myTest(d) {
+    console.log("d=" + d);
+
     //开始计算encText
     var encText = b(d, g);
     encText = b(encText, i);
@@ -1385,16 +1377,3 @@ function myTest(d) {
     var info = {"encText": encText, "encSecKey": encSecKey};
     return info;
 };
-
-// var myInfo = myTest('{"rid":"R_SO_4_186016","offset":"0","total":"false","limit":"20","csrf_token":""}');
-var myInfo = myTest(param);
-console.log("params=" + myInfo.encText + "&encSecKey=" + myInfo.encSecKey);
-
-
-// console.log(myInfo.encText);
-// console.log(myInfo.encSecKey);
-// console.log("结束时间2:" + new Date().getTime());
-// postData := fmt.Sprintf("params=%s&encSecKey=%s", encText, encSecKey)
-// console.log("params=" + myInfo.encText + "&encSecKey=" + myInfo.encSecKey);
-console.log("params:" + myInfo.encText);
-console.log("encSecKey:" + myInfo.encSecKey);
