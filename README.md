@@ -24,3 +24,4 @@ js lab
 |lab019|tool_proxy模板|
 |lab020|查看一个js的运行速度|
 |lab021|nodejs运行js文件|
+|lab022|网易云音乐加密js|

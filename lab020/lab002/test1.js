@@ -1390,7 +1390,7 @@ function myTest(d) {
 var myInfo = myTest(param);
 console.log(myInfo.encText);
 console.log(myInfo.encSecKey);
-console.log("结束时间:" + new Date().getTime());
+console.log("结束时间2:" + new Date().getTime());
 // postData := fmt.Sprintf("params=%s&encSecKey=%s", encText, encSecKey)
 // console.log("params=" + myInfo.encText + "&encSecKey=" + myInfo.encSecKey);
 console.log("params:" + myInfo.encText);
