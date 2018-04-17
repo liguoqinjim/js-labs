@@ -27,3 +27,4 @@ js lab
 |lab022|网易云音乐加密js测试|
 |lab023|网易云音乐加密分析|
 |lab024|lab010用nodejs调用|
+|lab025|totalControl脚本|
