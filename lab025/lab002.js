@@ -26,6 +26,9 @@ function runApp(dev, app, text) {
     if(textToArray[1]=="短信"){
         dev.runApp("com.android.mms");
     }
+    if(textToArray[1] == "大麦"){
+        dev.runApp("cn.damai")
+    }
 }
 
 var device = Device.searchObject(sigmaConst.DevSelectOne);
