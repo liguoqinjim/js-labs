@@ -8,4 +8,4 @@
 |lab004|demo,lab|显示公交线路|
 |lab005|demo|圆点标记|
 |lab006|demo|轨迹展示|
-
+|lab007|demo|地图样式，显示什么，路况信息|
