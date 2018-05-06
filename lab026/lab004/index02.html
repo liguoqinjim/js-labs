@@ -7,7 +7,7 @@
     <title>公交线路查询</title>
     <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main.css"/>
     <script type="text/javascript"
-            src="https://webapi.amap.com/maps?v=1.4.2&key=cc26c50c01fbdd00b30ea416dfbf93dd"></script>
+            src="https://webapi.amap.com/maps?v=1.4.6&key=cc26c50c01fbdd00b30ea416dfbf93dd"></script>
 </head>
 <body>
 <div id="mapContainer"></div>
@@ -22,7 +22,7 @@
 
     var map = new AMap.Map("mapContainer", {
         resizeEnable: true,
-        center: [116.397428, 39.90923],//地图中心点
+        center: [121.529326, 31.216757],//地图中心点
         zoom: 13 //地图显示的缩放级别
     });
 
@@ -85,7 +85,7 @@
                 var startPot = stops[0].location;
                 var endPot = stops[stops.length - 1].location;
 
-                if (i == 0) drawbusLine(startPot, endPot, pathArr);
+                if (i == 0) drawbusLine(startPot, endPot, pathArr, stops);
             }
         }
     }
@@ -93,7 +93,7 @@
     /*
      *绘制路线
      */
-    function drawbusLine(startPot, endPot, BusArr) {
+    function drawbusLine(startPot, endPot, BusArr, stops) {
         //绘制起点，终点
         var stmarker = new AMap.Marker({
             map: map,
@@ -115,12 +115,37 @@
             strokeOpacity: 0.5,//线透明度
             strokeWeight: 6//线宽
         });
+
         map.setFitView();
+
+        //绘制站点位置
+        for (var i = 0; i < stops.length; i++) {
+            if (i == 0 || i == stops.length - 1) {
+                continue
+            }
+
+            console.log(stops[i]);
+
+            var circleMarker = new AMap.CircleMarker({
+                center: [stops[i].location.O, stops[i].location.P],
+                radius: 5,
+                strokeColor: 'white',
+                strokeWeight: 2,
+                strokeOpacity: 0.5,
+                fillColor: 'rgba(0,0,255,1)',
+                fillOpacity: 0.5,
+                zIndex: 10,
+                bubble: true,
+                cursor: 'pointer',
+            });
+            circleMarker.setMap(map)
+        }
+
     }
 
     lineSearch()
 </script>
-<script type="text/javascript" src="https://webapi.amap.com/demos/js/liteToolbar.js"></script>
+<!--<script type="text/javascript" src="https://webapi.amap.com/demos/js/liteToolbar.js"></script>-->
 
 </body>
 </html>
