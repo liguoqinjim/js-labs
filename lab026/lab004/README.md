@@ -1,8 +1,10 @@
 ###
 
-|实验|简介|
-|---|---|
-|index|demo|
+|实验|简介|说明|
+|---|---|---|
+|index|demo||
+|index02|lab001|显示公交车线路和站点|
+|index03|lab002|在index02的基础上，添加路径移动|
 
 #### 参考资料
  - http://lbs.amap.com/api/javascript-api/guide/map-data/busroutes

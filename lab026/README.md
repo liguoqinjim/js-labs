@@ -7,3 +7,5 @@
 |lab003|demo|自定义图层|
 |lab004|demo,lab|显示公交线路|
 |lab005|demo|圆点标记|
+|lab006|demo|轨迹展示|
+
