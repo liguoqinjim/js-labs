@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index02</title>
+    <script src="../js/1.3.7/chroma.js"></script>
+</head>
+<body>
+<h1>查看控制台</h1>
+<script>
+    // 使用W3CX11定义的颜色创建chroma
+    var hotpink = chroma("hotpink");
+    console.log("hotpink=", hotpink);
+    // 会自动转到16进制的颜色表达
+    console.log("hotpink=" + hotpink);
+
+    // 如果在默认颜色里面没有找到的，会读取十六进制字符串颜色
+    var color2 = chroma("#ff3399");
+    var color3 = chroma("F39");
+    console.log("color2=" + color2);
+    console.log("color3=" + color3);
+
+    // 16进制数字也是可以的
+    var color4 = chroma(0xff3399);
+    console.log("color4=" + color4);
+
+    // 指定RGB的值也是可以的
+    var color5 = chroma(0xff, 0x33, 0x99);
+    console.log("color5=" + color5);
+    color5 = chroma(255, 51, 153);
+    console.log("color5=" + color5);
+    color5 = chroma([255, 51, 153]);
+    console.log("color5=" + color5);
+
+    // 也可以指定用什么颜色空间，最后一个值是指定的颜色空间
+    var color6 = chroma(330, 1, 0.6, "hsl");
+    console.log("color6=" + color6);
+    // 或者  hsl,hsv,lab,lch
+    color6 = chroma.hsl(330, 1, 0.6);
+    console.log("color6=" + color6);
+
+    //还有很多生成颜色的方法，比如混合两种颜色等等，具体可以看API
+</script>
+</body>
+</html>

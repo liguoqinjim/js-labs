@@ -1,8 +1,8 @@
 # js-labs
 js lab
 
-|实验|简介|
-|---|---|
+|实验|简介|说明|
+|---|---|---|
 |lab001|网易云音乐加密|
 |lab002|正则表达式|
 |lab003|多参数函数|
@@ -29,3 +29,4 @@ js lab
 |lab024|lab010用nodejs调用|
 |lab025|totalControl脚本|
 |lab026|高德地图|
+|lab027|chroma.js|颜色管理|
