@@ -7,6 +7,7 @@
 |index03|lab002|在index02的基础上，添加路径移动|
 |index04|lab003|在index03的基础上，修改移动样式|
 |index05|lab004|在index04的基础上，添加实时路况|
+|index06|lab005|在index02的基础上，测试数据|测试得到：via_stops里面的站点数据，是包含在path的所有的点里面的|
 
 #### 参考资料
  - http://lbs.amap.com/api/javascript-api/guide/map-data/busroutes
