@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index03</title>
+    <script src="../js/1.3.7/chroma.js"></script>
+</head>
+<body>
+<h1>查看控制台</h1>
+<script>
+    // 透明度
+    var color1 = chroma("red").alpha(0.5);
+    //可以看到rbg数组里面的第三个值就是透明度
+    console.log("color1=", color1);
+    var alpha1 = color1.alpha();
+    console.log("alpha1=" + alpha1);
+
+    // 调整颜色的亮暗，变深
+    var color2 = chroma("hotpink");
+    console.log("color2=" + color2);
+    color2 = "#ff69b4";//展示颜色的，在webstorm里面可以看到对应的颜色
+    var color3 = chroma("hotpink").darken();
+    console.log("color3=" + color3);
+    color3 = "#c93384";
+
+    // 变亮
+    var color4 = chroma("hotpink").brighten();
+    console.log("color4=" + color4);
+    color4 = "#ff9ce6";
+
+    // 改变颜色的饱和度
+    // chroma('slategray').saturate();
+    // chroma('hotpink').desaturate();
+
+    // 设置单个颜色通道的值
+    // chroma('skyblue').set('hsl.h', 0);
+    // chroma('orangered').set('lab.l', '*0.5')//relative change
+
+    // 颜色的亮度   luminance
+    // chroma('white').luminance();
+    // chroma('white').luminance(0.5);
+
+    // 颜色转换到hex
+    var colorHex = chroma("orange").hex();
+    console.log("colorHex=" + colorHex);
+    // 也可以从hex转换到颜色名称，但是不在默认颜色里面的就不会转换了
+    var colorName = chroma("#ffa500").name();
+    console.log("colorName=" + colorName);
+
+    // 转换到rbg和hsl的 css样式
+    var cssRgb = chroma("teal").css();
+    console.log("cssRgb=" + cssRgb);
+    var cssRgba = chroma("teal").alpha(0.5).css();
+    console.log("cssRgba=" + cssRgba);
+    var cssHsl = chroma("teal").css("hsl");
+    console.log("cssHsl=" + cssHsl);
+
+    // 转换到rgb数组
+    var rgb1 = chroma("orange").rgb();
+    console.log("rgb1=", rgb1);
+    // false的时候，传回的float的小数
+    var rgb2 = chroma("orange").darken().rgb(false);
+    console.log("rgb2=", rgb2);
+
+    // 转换到rbga
+    var rgba1 = chroma("orange").rgba();
+    console.log("rgba1=", rgba1);
+
+    // 转换到hsl
+    var hsl1 = chroma("orange").hsl();
+    console.log("hsl1=", hsl1);
+
+    // 颜色的色温，色温值越大越冷
+    var temperature1 = chroma("#ff3300").temperature();
+    var temperature2 = chroma("#b3ccff").temperature();
+    console.log("temperature1=" + temperature1);
+    console.log("temperature2=" + temperature2);
+
+    // gl，和rgb一样，就是把值从0-255转换到[0-1]
+    var gl1 = chroma("#33cc00").gl();
+    console.log("gl1=" + gl1);
+
+</script>
+</body>
+</html>
