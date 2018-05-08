@@ -8,8 +8,7 @@
 |index04|lab003|在index03的基础上，修改移动样式|
 |index05|lab004|在index04的基础上，添加实时路况|
 |index06|lab005|在index02的基础上，测试数据|测试得到：via_stops里面的站点数据，是包含在path的所有的点里面的|
-|index07|lab006|在index02的基础上，用圆圈标注位置|完成：从服务器接收线路上所有车辆的位置，相对到达站点画圆|
-|index08|lab007|在index07的基础上，测试图形的相交||
+|index07|lab006|在index02的基础上，用圆圈标注位置|完成：从服务器接收线路上所有车辆的位置，相对到达站点画圆，添加实时路况|
 
 #### 参考资料
  - http://lbs.amap.com/api/javascript-api/guide/map-data/busroutes

@@ -16,6 +16,8 @@
 <body>
 <div id="mapContainer"></div>
 <script language="javascript">
+
+
     /*
      * 该示例主要流程分为三个步骤
      * 1. 首先调用公交路线查询服务(lineSearch)
@@ -33,6 +35,23 @@
         center: [121.529326, 31.216757],//地图中心点
         zoom: 13 //地图显示的缩放级别
     });
+
+    //实时路况
+    //实时路况图层
+    var trafficLayer = new AMap.TileLayer.Traffic({
+        zIndex: 1 //注意这个值，设置为10的时候就和我们画的圆的位置是一样的了
+    });
+    trafficLayer.setMap(map);
+    // var isVisible = true;
+    // AMap.event.addDomListener(document.getElementById('control'), 'click', function () {
+    //     if (isVisible) {
+    //         trafficLayer.hide();
+    //         isVisible = false;
+    //     } else {
+    //         trafficLayer.show();
+    //         isVisible = true;
+    //     }
+    // }, false);
 
     /*
      *清空地图覆盖物与查询结果
@@ -210,7 +229,7 @@
                         strokeOpacity: 1, //线透明度
                         strokeWeight: 3, //线粗细度
                         fillColor: "#ee2200", //填充颜色
-                        fillOpacity: 0.15//填充透明度
+                        fillOpacity: 0.05//填充透明度
                     });
                     circle.setMap(map);
                 }
