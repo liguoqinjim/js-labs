@@ -1,0 +1,359 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>公交线路查询</title>
+    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main.css"/>
+    <script type="text/javascript"
+            src="https://webapi.amap.com/maps?v=1.4.6&key=cc26c50c01fbdd00b30ea416dfbf93dd"></script>
+
+    <!--jquery-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="mapContainer"></div>
+<script language="javascript">
+    /*
+     * 该示例主要流程分为三个步骤
+     * 1. 首先调用公交路线查询服务(lineSearch)
+     * 2. 根据返回结果解析，输出解析结果(lineSearch_Callback)
+     * 3. 在地图上绘制公交线路()
+     */
+    var resLine = ''; //结果表格对象
+
+    //记录结果
+    var aMapResult;//高德的线路信息
+    var selfResult;//访问自己服务器得到的数据
+    var busPolyline;
+
+    var map = new AMap.Map("mapContainer", {
+        resizeEnable: true,
+        center: [121.529326, 31.216757],//地图中心点
+        zoom: 13 //地图显示的缩放级别
+    });
+
+    //实时路况
+    //实时路况图层
+    //暂时关闭实时路况
+    // var trafficLayer = new AMap.TileLayer.Traffic({
+    //     zIndex: 1 //注意这个值，设置为10的时候就和我们画的圆的位置是一样的了
+    // });
+    // trafficLayer.setMap(map);
+
+    /*
+     *清空地图覆盖物与查询结果
+     */
+    function mapclear() {
+        btContent = '';
+        resLine = '';
+        map.clearMap();
+    }
+
+    /*
+     *公交线路查询
+     */
+    function lineSearch() {
+        //加载公交线路查询插件
+        //实例化公交线路查询类，只取回一条路线
+        AMap.service(["AMap.LineSearch"], function () {
+            var linesearch = new AMap.LineSearch({
+                pageIndex: 1,
+                city: '上海',
+                pageSize: 1,
+                extensions: 'all'
+            });
+            //搜索“536”相关公交线路
+            linesearch.search('871', function (status, result) {
+                if (status === 'complete' && result.info === 'OK') {
+                    aMapResult = result.lineInfo;
+
+                    console.log(result);
+                    lineSearch_Callback(result);
+                } else {
+                    alert(result);
+                }
+            });
+        });
+    }
+
+    /*
+     * 公交路线查询服务返回数据解析概况
+     * param Array[]  lineArr     返回公交线路总数
+     * param String   lineName    公交线路名称
+     * param String   lineCity    公交所在城市
+     * param String   company     公交所属公司
+     * param Number   stime       首班车时间
+     * param Number   etime       末班车时间
+     * param Number   bprice      公交起步票价
+     * param Number   tprice      公交全程票价
+     * param Array[]  pathArr     公交线路路径数组
+     */
+    function lineSearch_Callback(data) {
+        var lineArr = data.lineInfo;
+        var lineNum = data.lineInfo.length;
+        if (lineNum == 0) {
+            resLine = data.info;
+        }
+        else {
+            for (var i = 0; i < lineNum; i++) {
+                var pathArr = lineArr[i].path;
+                var stops = lineArr[i].via_stops;
+                var startPot = stops[0].location;
+                var endPot = stops[stops.length - 1].location;
+
+                if (i == 0) drawbusLine(startPot, endPot, pathArr, stops);
+            }
+        }
+    }
+
+    /*
+     *绘制路线
+     */
+    function drawbusLine(startPot, endPot, BusArr, stops) {
+        //绘制起点，终点
+        var stmarker = new AMap.Marker({
+            map: map,
+            position: [startPot.lng, startPot.lat], //基点位置
+            icon: "https://webapi.amap.com/theme/v1.3/markers/n/start.png",
+            zIndex: 10
+        });
+        var endmarker = new AMap.Marker({
+            map: map,
+            position: [endPot.lng, endPot.lat], //基点位置
+            icon: "https://webapi.amap.com/theme/v1.3/markers/n/end.png",
+            zIndex: 10
+        });
+        //绘制乘车的路线
+        busPolyline = new AMap.Polyline({
+            map: map,
+            path: BusArr,
+            strokeColor: "#09f",//线颜色
+            strokeOpacity: 0.3,//线透明度
+            strokeWeight: 4//线宽
+        });
+
+        map.setFitView();
+
+        //绘制站点位置
+        for (var i = 0; i < stops.length; i++) {
+            if (i == 0 || i == stops.length - 1) {
+                continue
+            }
+
+            var circleMarker = new AMap.CircleMarker({
+                center: [stops[i].location.O, stops[i].location.P],
+                radius: 5,
+                strokeColor: 'white',
+                strokeWeight: 2,
+                strokeOpacity: 0.5,
+                fillColor: 'rgba(0,0,255,1)',
+                fillOpacity: 0.5,
+                zIndex: 10,
+                bubble: true,
+                cursor: 'pointer',
+            });
+            circleMarker.setMap(map)
+        }
+    }
+
+    lineSearch();
+
+    //检查站点的信息，可能有站点的名字是不一样的
+    function checkStops() {
+        $.ajax({
+            url: "http://localhost:9999/allStops", success: function (result) {
+                // selfResult = result;
+
+                console.log("站点信息:", result);
+                if (aMapResult[0].via_stops.length == result.Stops.length) {
+                    for (var i = 0; i < aMapResult[0].via_stops.length; i++) {
+                        console.log(aMapResult[0].via_stops[i].name + "   " + result.Stops[i].StopName)
+                    }
+
+                    //现在的做法：只要两个站点的数量相等，就把self的name替换到aMapResult里面
+
+                } else {
+                    console.log("aMapResult=", aMapResult);
+                    console.log("selfResult=", result);
+                }
+
+                //打印高德的站名
+                // for (var i = 0; i < aMapResult[0].via_stops.length; i++) {
+                //     console.log("高德站名:" + aMapResult[0].via_stops[i].name)
+                // }
+                // for (var i = 0; i < result.Stops.length; i++) {
+                //     console.log("self站名:" + result.Stops[i].StopName)
+                // }
+
+
+                // 获取车辆信息
+                // showBus();
+            }
+        });
+    }
+
+    //显示位置
+    function showBus() {
+        $.ajax({
+            url: "http://localhost:9999/stopInfo?lineId=10407&stopId=26936", success: function (result) {
+                selfResult = result;
+
+                for (var i = 0; i < result.CarInfos.length; i++) {
+                    var carInfo = result.CarInfos[i];
+                    console.log("carInfo=", carInfo);
+
+                    // console.log("carInfo:", carInfo);
+                    //得到相对站点
+                    var s = aMapResult[0].via_stops[carInfo.StopIdRIndex];
+                    console.log("s=", s);
+
+                    //
+                    var circle = new AMap.Circle({
+                        center: new AMap.LngLat(s.location.lng, s.location.lat),// 圆心位置
+                        radius: carInfo.Distance, //半径
+                        strokeColor: "#F33", //线颜色
+                        strokeOpacity: 0.8, //线透明度
+                        strokeWeight: 2, //线粗细度
+                        fillColor: "#ee2200", //填充颜色
+                        fillOpacity: 0.05//填充透明度
+                    });
+                    circle.setMap(map);
+
+                    //判断这个圆和线段是否相交
+                    var s1 = aMapResult[0].via_stops[carInfo.StopIndex - 1];
+                    console.log("站点1的位置" + s1.location.lng + "," + s1.location.lat + "," + s1.name);
+                    var p1 = getIndexFromPath(carInfo.StopIndex - 1);
+                    console.log("p1=", p1);
+
+                    var s2 = aMapResult[0].via_stops[carInfo.StopIndex];
+                    console.log("站点2的位置" + s2.location.lng + "," + s2.location.lat + "," + s2.name);
+                    var p2 = getIndexFromPath(carInfo.StopIndex);
+                    console.log("p2=", p2);
+
+                    busPolyline.hide();
+                    //画出p1至p2
+                    var paths = aMapResult[0].path.slice(p1, p2 + 1)
+                    pathPolyline = new AMap.Polyline({
+                        map: map,
+                        path: paths,
+                        strokeColor: "#ff00e9",//线颜色
+                        strokeOpacity: 0.3,//线透明度
+                        strokeWeight: 4//线宽
+                    });
+
+
+                    //打印所有点
+                    for (var i = 0; i < paths.length; i++) {
+                        console.log(i + "=", paths[i]);
+                    }
+
+                    //判断有没有相交
+                    var intersection = false;
+                    for (var i = 0; i < paths.length; i++) {
+                        var i2 = i + 1;
+                        while (paths[i].O == paths[i2].O || paths[i].P == paths[i2].P) {
+                            i2++
+                        }
+
+                        console.log("计算中i1=", paths[i]);
+                        console.log("计算中i2=", paths[i2]);
+
+                        intersection = lineCircle(paths[i].O, paths[i].P, paths[i2].O, paths[i2].P, s.location.O, s.location.P, carInfo.Distance);
+                        if (intersection == true) {
+                            console.log("有相交i=" + i + ",i2=" + i2);
+
+                            var circleMarker2 = new AMap.CircleMarker({
+                                center: [paths[i].lng, paths[i].lat],
+                                radius: 5,
+                                strokeColor: 'white',
+                                strokeWeight: 2,
+                                strokeOpacity: 0.5,
+                                fillColor: 'rgba(0,0,255,1)',
+                                fillOpacity: 0.5,
+                                zIndex: 50,
+                                bubble: true,
+                                cursor: 'pointer',
+                            });
+                            circleMarker2.setMap(map)
+                            // new AMap.CircleMarker({
+                            //     center: [paths[i + 1].lng, paths[i + 1].lat],
+                            //     radius: 50,
+                            //     strokeColor: 'white',
+                            //     strokeWeight: 2,
+                            //     strokeOpacity: 0.5,
+                            //     fillColor: 'rgba(0,0,255,1)',
+                            //     fillOpacity: 0.5,
+                            //     zIndex: 10,
+                            //     bubble: true,
+                            //     cursor: 'pointer',
+                            // });
+
+                            break
+                        }
+
+                        if (i2 == paths.length - 1) {
+                            break
+                        }
+
+                        i = i2
+                    }
+                    if (intersection == false) {
+                        console.log("没有相交");
+                    }
+
+                    break;
+                }
+            }
+        });
+    }
+
+    setTimeout(showBus, 1000);
+
+    //判断圆和线段是否相交
+    function lineCircle(x1, y1, x2, y2, xc, yc, rc) {
+        var ac = [xc - x1, yc - y1]
+        var ab = [x2 - x1, y2 - y1]
+        var ab2 = dot(ab, ab)
+        var acab = dot(ac, ab)
+        var t = acab / ab2
+        t = (t < 0) ? 0 : t
+        t = (t > 1) ? 1 : t
+        var h = [(ab[0] * t + x1) - xc, (ab[1] * t + y1) - yc]
+        var h2 = dot(h, h)
+
+        console.log("计算:x1=" + x1);
+        console.log("计算:y1=" + y1);
+        console.log("计算:x2=" + x2);
+        console.log("计算:y2=" + y2);
+        console.log("计算:xc=" + xc);
+        console.log("计算:yc=" + yc);
+        console.log("计算:rc=" + rc);
+        console.log("计算:h2=" + h2);
+        console.log("计算:rc*rc=" + rc * rc);
+        return h2 <= rc * rc
+    }
+
+    function dot(v1, v2) {
+        return (v1[0] * v2[0]) + (v1[1] * v2[1])
+    }
+
+    //在lineInfo的path里面找到index,stopIndex是线路的index
+    function getIndexFromPath(stopIndex) {
+        var s = aMapResult[0].via_stops[stopIndex];
+
+        for (var i = 0; i < aMapResult[0].path.length; i++) {
+            if (aMapResult[0].path[i].lng == s.location.lng && aMapResult[0].path[i].lat == s.location.lat) {
+                console.log("path=", aMapResult[0].path[i]);
+                return i;
+            }
+        }
+    }
+
+</script>
+<!--<script type="text/javascript" src="https://webapi.amap.com/demos/js/liteToolbar.js"></script>-->
+
+</body>
+</html>
