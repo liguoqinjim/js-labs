@@ -6,6 +6,10 @@
 |index02|React JSX|
 |index03|组件|向组件传值|
 |index04|state|状态|
+|index05|props|和state有区别，state可改变，props不会|
+|index06|React 组件 API|
+|index07|React 组件生命周期|
+
 
 #### 注意点
  - `<script type="text/babel">`，这样指定才可以使用JSX
