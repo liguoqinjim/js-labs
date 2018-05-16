@@ -56,4 +56,4 @@ commonConfig = {
     }
 }
 
-module.exports = commonConfig
+module.exports = commonConfig;
