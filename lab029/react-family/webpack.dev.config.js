@@ -1,6 +1,8 @@
 const path = require('path');
 
 module.exports = {
+    //调试工具优化
+    devtool: 'inline-source-map',
 
     /*入口*/
     entry: [
@@ -38,6 +40,6 @@ module.exports = {
             actions: path.join(__dirname, "src/redux/actions"),
             reducers: path.join(__dirname, "src/redux/reducers"),
         }
-    }
+    },
 };
 
