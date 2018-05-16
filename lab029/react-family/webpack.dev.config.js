@@ -27,12 +27,10 @@ const devConfig = {
         contentBase: path.join(__dirname, './dist'),
         historyApiFallback: true,
         host: '0.0.0.0',
+        proxy: {
+            "/api/*": "http://localhost:8090/$1"
+        }
     },
-    plugins: [
-        new webpack.DefinePlugin({
-            MOCK: true
-        })
-    ]
 };
 
 //合并config
