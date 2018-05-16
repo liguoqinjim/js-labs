@@ -18,5 +18,13 @@ module.exports = {
             include: path.join(__dirname, 'src')
         }]
     },
+
+    //webpack-dev-server
+    devServer: {
+        port: 8080,
+        contentBase: path.join(__dirname, './dist'),
+        historyApiFallback: true,
+        host: '0.0.0.0'
+    }
 };
 
