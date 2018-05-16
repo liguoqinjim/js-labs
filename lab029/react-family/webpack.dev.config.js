@@ -21,6 +21,9 @@ module.exports = {
             test: /\.js$/,
             use: ['babel-loader?cacheDirectory=true'],
             include: path.join(__dirname, 'src')
+        }, {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader']
         }]
     },
 
@@ -32,6 +35,7 @@ module.exports = {
         host: '0.0.0.0'
     },
 
+    //别名
     resolve: {
         alias: {
             pages: path.join(__dirname, "src/pages"),
@@ -41,5 +45,8 @@ module.exports = {
             reducers: path.join(__dirname, "src/redux/reducers"),
         }
     },
+
+    //css
+
 };
 
