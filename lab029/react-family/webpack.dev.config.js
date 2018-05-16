@@ -1,5 +1,7 @@
 const path = require('path');
 
+var HTMLWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
     //调试工具优化
     devtool: 'inline-source-map',
@@ -55,7 +57,13 @@ module.exports = {
         }
     },
 
-    //css
+    //plugin
+    plugins: [
+        new HTMLWebpackPlugin({
+            filename: 'index.html',
+            template: path.join(__dirname, "src/index.html")
+        })
+    ]
 
 };
 
