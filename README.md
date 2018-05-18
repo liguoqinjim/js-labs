@@ -17,7 +17,7 @@ js lab
 |lab012|createjs|
 |lab013|fuse，json()|
 |lab014|defuant,json(https://github.com/hbi99/defiant.js)|
-|lab015|sprintf.js(https://github.com/alexei/sprintf.js)|
+|lab015|sprintf.js|https://github.com/alexei/sprintf.js|
 |lab016|amaze ui后台模板|
 |lab017|途牛js分析|
 |lab018|httpbin模仿|
@@ -32,3 +32,4 @@ js lab
 |lab027|chroma.js|颜色管理|
 |lab028|react|相关教程|
 |lab029|react教程|
+|lab030|layer,web弹层组件|https://github.com/sentsin/layui/|
