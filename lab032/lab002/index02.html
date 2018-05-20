@@ -1,27 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Bootstrap 实例</title>
+    <title>Split.js</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../libs/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="pholcus.css">
-
     <style>
-        [class^="col-"] {
-            /*padding-top: 30px;*/
-            /*padding-bottom: 10px;*/
-            /*background-color: #eee;*/
-            /*background-color: rgba(86, 61, 124, .15);*/
-            /*border: 1px solid #ddd;*/
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            padding: 8px;
+            background-color: #F6F6F6;
+            box-sizing: border-box;
+        }
+
+        .split {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .content {
+            border: 1px solid #c05c40;
+            box-shadow: inset 0 1px 2px #e4e4e4;
+            background-color: #fff;
+        }
+
+        .gutter {
+            background-color: transparent;
+            background-repeat: no-repeat;
+            background-position: 50%;
+        }
+
+        .gutter.gutter-horizontal {
+            cursor: col-resize;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+        }
+
+        .gutter.gutter-vertical {
+            cursor: row-resize;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=');
+        }
+
+        .split.split-horizontal, .gutter.gutter-horizontal {
+            height: 100%;
+            float: left;
         }
     </style>
 </head>
 <body>
+<div id="a" class="split">
+    <div id="c" class="split split-horizontal content">
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <table class="table table-condensed">
                 <caption>精简表格布局</caption>
                 <thead>
@@ -51,7 +87,10 @@
             </table>
         </div>
 
-        <div class="col-md-6">
+    </div>
+    <div id="d" class="split split-horizontal content">
+
+        <div>
             <form class="form-horizontal" role="form">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">聚焦</label>
@@ -112,26 +151,37 @@
             </form>
         </div>
     </div>
-
-    <!--控制台-->
-    <div class="row">
-        <div class="col-md-12">
-            <small>本行内容是在标签内</small>
-            <br>
-            <strong>本行内容是在标签内</strong><br>
-            <em>本行内容是在标签内，并呈现为斜体</em><br>
-            <p class="text-left">向左对齐文本</p>
-            <p class="text-center">居中对齐文本</p>
-            <p class="text-right">向右对齐文本</p>
-            <p class="text-muted">本行内容是减弱的</p>
-            <p class="text-primary">本行内容带有一个 primary class</p>
-            <p class="text-success">本行内容带有一个 success class</p>
-            <p class="text-info">本行内容带有一个 info class</p>
-            <p class="text-warning">本行内容带有一个 warning class</p>
-            <p class="text-danger">本行内容带有一个 danger class</p>
-        </div>
+</div>
+<div id="b" class="split">
+    <div class="col-md-12">
+        <small>本行内容是在标签内</small>
+        <br>
+        <strong>本行内容是在标签内</strong><br>
+        <em>本行内容是在标签内，并呈现为斜体</em><br>
+        <p class="text-left">向左对齐文本</p>
+        <p class="text-center">居中对齐文本</p>
+        <p class="text-right">向右对齐文本</p>
+        <p class="text-muted">本行内容是减弱的</p>
+        <p class="text-primary">本行内容带有一个 primary class</p>
+        <p class="text-success">本行内容带有一个 success class</p>
+        <p class="text-info">本行内容带有一个 info class</p>
+        <p class="text-warning">本行内容带有一个 warning class</p>
+        <p class="text-danger">本行内容带有一个 danger class</p>
     </div>
 </div>
-
 </body>
+<script src="../libs/splitjs/split.js"></script>
+<script>
+    Split(['#a', '#b'], {
+        direction: 'vertical',
+        gutterSize: 8,
+        cursor: 'row-resize'
+    })
+
+    Split(['#c', '#d'], {
+        sizes: [25, 75],
+        gutterSize: 8,
+        cursor: 'col-resize'
+    })
+</script>
 </html>
