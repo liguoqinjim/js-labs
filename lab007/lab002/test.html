@@ -24,6 +24,7 @@
     console.log("encrypted_hex:" + encrypted_hex);
     var encrypted_base64 = encrypted.ciphertext.toString(CryptoJS.enc.Base64);
     console.log("encrypted_base64:" + encrypted_base64);
+
     //解密
     var decrypted = CryptoJS.AES.decrypt(encrypted, key, {
         iv: iv,
@@ -36,6 +37,8 @@
     console.log("decrypted_hex:" + decrypted_hex);
     var decrypted_base64 = decrypted.toString(CryptoJS.enc.Base64);
     console.log("decrypted_base64:" + decrypted_base64);
+
+    console.log("----------------------------------------------------------")
 
     //加密:Pkcs7填充
     var encrypted_pkcs7 = CryptoJS.AES.encrypt(message, key, {

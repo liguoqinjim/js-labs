@@ -36,3 +36,4 @@ js lab
 |lab031|Split.js|https://github.com/nathancahill/Split.js/|
 |lab032|bootstrap3||
 |lab033|ajax|
+|lab034|date|
