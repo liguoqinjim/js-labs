@@ -35,3 +35,4 @@ js lab
 |lab030|layer,web弹层组件|https://github.com/sentsin/layui/|
 |lab031|Split.js|https://github.com/nathancahill/Split.js/|
 |lab032|bootstrap3||
+|lab033|ajax|
