@@ -1,5 +1,4 @@
 # js-labs
-js lab
 
 |实验|简介|说明|
 |---|---|---|
@@ -37,3 +36,4 @@ js lab
 |lab032|bootstrap3||
 |lab033|ajax|
 |lab034|date|
+|lab035|clipboard.js，剪贴板|https://github.com/zenorocha/clipboard.js|
