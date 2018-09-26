@@ -38,3 +38,4 @@
 |lab034|date|
 |lab035|clipboard.js，剪贴板|https://github.com/zenorocha/clipboard.js|
 |lab036|watch.js|https://github.com/melanke/Watch.JS|
+|lab037|console打印||
