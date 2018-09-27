@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>test01</title>
+    <title>test02</title>
 </head>
 <body>
 <script>
@@ -38,9 +38,9 @@
     }
 
     get('story.json').then(function (response) {
-        console.log("Success!", response);
-    }, function (error) {
-        console.error("Failed!", error);
+        return JSON.parse(response);
+    }).then(function (response) {
+        console.log("Yey JSON!", response);
     })
 </script>
 </body>
