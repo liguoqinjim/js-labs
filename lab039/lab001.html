@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab001</title>
+</head>
+<body>
+<script>
+    function cal(a, b) {
+        return a + b , a - b
+    }
+
+    ret = cal(2, 3);
+    console.log("ret=", ret, typeof ret);
+
+    function cal2(c, d) {
+        return this.a + this.b + c + d, this.a * this.b * c * d;
+    }
+
+    num = {
+        a: 1,
+        b: 2
+    }
+    ret2 = cal2.call(num, 3, 4);
+    console.log("ret2=", ret2, typeof ret2);
+</script>
+</body>
+</html>

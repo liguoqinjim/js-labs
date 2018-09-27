@@ -40,3 +40,4 @@
 |lab036|watch.js|https://github.com/melanke/Watch.JS|
 |lab037|console打印||
 |lab038|Promise|
+|lab039|javascript语法测试|
