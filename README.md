@@ -41,3 +41,4 @@
 |lab037|console打印||
 |lab038|Promise|
 |lab039|javascript语法测试|
+|lab040|reqwest|https://github.com/ded/reqwest/releases|
