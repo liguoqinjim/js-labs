@@ -35,7 +35,7 @@
 |lab031|Split.js|https://github.com/nathancahill/Split.js/|
 |lab032|bootstrap3||
 |lab033|ajax|
-|lab034|date|
+|lab034|date，时间戳|
 |lab035|clipboard.js，剪贴板|https://github.com/zenorocha/clipboard.js|
 |lab036|watch.js|https://github.com/melanke/Watch.JS|
 |lab037|console打印||
