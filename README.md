@@ -43,3 +43,4 @@
 |lab039|javascript语法测试|
 |lab040|reqwest|https://github.com/ded/reqwest/releases|
 |lab041|js读取本地文件|
+|lab042|XMLHttpRequest|

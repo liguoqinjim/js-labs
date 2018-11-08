@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab001</title>
+</head>
+<body>
+<script>
+    function showHint(str) {
+        try {// Firefox, Opera 8.0+, Safari, IE7
+            xmlHttp = new XMLHttpRequest();
+        }
+        catch (e) {// Old IE
+            try {
+                xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            catch (e) {
+                alert("Your browser does not support XMLHTTP!");
+                return;
+            }
+        }
+        url = "http://119.3.8.69/cookies/set/hello/world";
+        url = "http://119.3.8.69/get";
+
+        xmlHttp.open("GET", url, false);
+        xmlHttp.send(null);
+        console.log(xmlHttp.responseText);
+    }
+
+    showHint()
+</script>
+</body>
+</html>
