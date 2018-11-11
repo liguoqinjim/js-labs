@@ -45,4 +45,4 @@
 |lab041|js读取本地文件|
 |lab042|XMLHttpRequest|
 |lab043|esprima|https://github.com/jquery/esprima|
-|lab044|nodejs读取文件|
+|lab044|nodejs读写文件|
