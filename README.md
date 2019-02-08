@@ -46,3 +46,4 @@
 |lab042|XMLHttpRequest|
 |lab043|esprima|https://github.com/jquery/esprima|
 |lab044|nodejs读写文件|
+|lab045|buffer|https://github.com/feross/buffer|

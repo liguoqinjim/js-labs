@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab001</title>
+</head>
+<body>
+
+<script>
+    var Buffer = require('buffer/').Buffer;
+
+    temp = "7ca471c682344c08b982ede0d4c7f577SHATYO2019-01-14";
+    e = new Uint8Array(temp);
+    e.__proto__ = Buffer.prototype;
+    e.write(48, e);
+    console.log("e=", e);
+</script>
+
+</body>
+</html>

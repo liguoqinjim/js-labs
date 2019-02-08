@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab001</title>
+</head>
+<body>
+
+<script src="http://cdn.bootcss.com/crypto-js/3.1.2/rollups/aes.js"></script>
+<script>
+    var message = "d2cdb1ed1f8f44dbbee6f42da44fb557SHATYO2019-01-14";
+
+    //正确处理
+    var wordArray = CryptoJS.enc.Utf8.parse(message);
+    console.log("wordArray_hex1:" + wordArray);//正确
+    console.log("wordArray_hex2:" + wordArray.toString(CryptoJS.enc.Hex));//正确 hex编码
+    console.log("wordArray_base64:" + wordArray.toString(CryptoJS.enc.Base64));//正确 base64编码
+    console.log("wordArray_utf8_1:" + wordArray.toString(CryptoJS.enc.Utf8));//正确 原文
+    console.log("wordArray_utf8_2:" + CryptoJS.enc.Utf8.stringify(wordArray));//正确 原文
+
+    //正确
+    //var hash = CryptoJS.SHA256("Message");
+    //alert(hash.toString(CryptoJS.enc.Base64)); // L3dmip37+NWEi57rSnFFypTG7ZI25Kdz9tyvpRMrL5E=
+    //alert(hash.toString(CryptoJS.enc.Latin1));
+    //alert(hash.toString(CryptoJS.enc.Hex)); // 2f77668a9dfbf8d5848b9eeb4a7145ca94c6ed9236e4a773f6dcafa5132b2f91
+</script>
+</body>
+</html>
