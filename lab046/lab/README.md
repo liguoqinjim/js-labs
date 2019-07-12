@@ -5,3 +5,4 @@
 |lab001|demo| |
 |lab002|得到json的返回| |
 |lab003|setCookie| |
+|lab004|监听request和response| |
