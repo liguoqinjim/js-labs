@@ -49,3 +49,5 @@
 |lab045|buffer|https://github.com/feross/buffer|
 |lab046|puppeteer|https://github.com/GoogleChrome/puppeteer|
 |lab047|websocket| |
+|lab048|encodeURIComponent| |
+|lab049|readability|https://github.com/mozilla/readability|
