@@ -51,3 +51,4 @@
 |lab047|websocket| |
 |lab048|encodeURIComponent| |
 |lab049|readability|https://github.com/mozilla/readability|
+|lab050|随机数| |
